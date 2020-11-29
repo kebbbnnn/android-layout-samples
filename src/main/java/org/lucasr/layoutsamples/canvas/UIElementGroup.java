@@ -97,6 +97,17 @@ public abstract class UIElementGroup extends AbstractUIElement {
         }
     }
 
+    public UIElement getChildAt(int index) {
+        if (index < 0 || index >= this.getChildCount()) {
+            return null;
+        }
+        return mElements.get(index);
+    }
+
+    public int getChildCount() {
+        return mElements.size();
+    }
+
     public void addElement(UIElement element) {
         LayoutParams lp = element.getLayoutParams();
         if (lp == null) {

@@ -19,6 +19,7 @@ package org.lucasr.layoutsamples.widget;
 import android.content.res.Resources;
 import android.text.TextUtils;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.View;
 import android.view.View.MeasureSpec;
 import android.view.ViewGroup.MarginLayoutParams;
@@ -72,7 +73,7 @@ public class TweetElement extends UIElementGroup implements TweetPresenter {
         mPostImageTarget = new ImageElementTarget(res, mPostImage);
 
         mActionIcons = new EnumMap(Action.class);
-        for (Action action : Action.values()) {
+        for (final Action action : Action.values()) {
             final int elementId;
             switch (action) {
                 case REPLY:
@@ -90,8 +91,15 @@ public class TweetElement extends UIElementGroup implements TweetPresenter {
                 default:
                     throw new IllegalArgumentException("Unrecognized tweet action");
             }
+            UIElement actionElement = findElementById(elementId);
+            actionElement.setOnClickListener(new UIElement.OnClickListener() {
+                @Override
+                public void onClick(UIElement element) {
+                    Log.d(TweetElement.class.getName(), "Action clicked: " + action);
+                }
+            });
 
-            mActionIcons.put(action, findElementById(elementId));
+            mActionIcons.put(action, actionElement);
         }
     }
 

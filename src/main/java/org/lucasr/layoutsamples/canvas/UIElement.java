@@ -19,6 +19,8 @@ package org.lucasr.layoutsamples.canvas;
 import android.content.Context;
 import android.content.res.Resources;
 import android.graphics.Canvas;
+import android.view.MotionEvent;
+import android.view.View;
 import android.view.ViewGroup.LayoutParams;
 
 public interface UIElement {
@@ -62,4 +64,11 @@ public interface UIElement {
 
     public int getVisibility();
     public void setVisibility(int visibility);
+
+    public boolean dispatchTouchEvent(MotionEvent event);
+    public void setOnClickListener(UIElement.OnClickListener l);
+
+    public interface OnClickListener {
+        void onClick(UIElement element);
+    }
 }

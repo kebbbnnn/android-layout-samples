@@ -19,6 +19,8 @@ package org.lucasr.layoutsamples.canvas;
 import android.content.Context;
 import android.content.res.Resources;
 import android.graphics.Canvas;
+import android.view.MotionEvent;
+import android.view.View;
 import android.view.ViewGroup;
 
 public class UIElementWrapper implements UIElement {
@@ -172,6 +174,12 @@ public class UIElementWrapper implements UIElement {
     public void setVisibility(int visibility) {
         mWrappedElement.setVisibility(visibility);
     }
+
+    @Override
+    public boolean dispatchTouchEvent(MotionEvent event) { return mWrappedElement.dispatchTouchEvent(event); }
+
+    @Override
+    public void setOnClickListener(UIElement.OnClickListener l) { mWrappedElement.setOnClickListener(l); }
 
     public UIElement getWrappedElement() {
         return mWrappedElement;

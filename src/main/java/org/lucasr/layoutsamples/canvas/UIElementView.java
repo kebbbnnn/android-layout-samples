@@ -19,7 +19,10 @@ package org.lucasr.layoutsamples.canvas;
 import android.content.Context;
 import android.graphics.Canvas;
 import android.util.AttributeSet;
+import android.util.Log;
+import android.view.MotionEvent;
 import android.view.View;
+import android.view.ViewGroup;
 
 public class UIElementView extends View implements UIElementHost {
     private UIElement mUIElement;
@@ -119,6 +122,11 @@ public class UIElementView extends View implements UIElementHost {
         if (mUIElement != null) {
             mUIElement.drawableStateChanged();
         }
+    }
+
+    @Override
+    public boolean dispatchTouchEvent(MotionEvent event) {
+        return mUIElement != null ? mUIElement.dispatchTouchEvent(event) : super.dispatchTouchEvent(event);
     }
 
     public UIElement getUIElement() {
