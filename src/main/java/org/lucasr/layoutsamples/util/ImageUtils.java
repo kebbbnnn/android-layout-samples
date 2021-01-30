@@ -20,6 +20,7 @@ import android.content.Context;
 import android.widget.ImageView;
 
 import com.squareup.picasso.Picasso;
+import com.squareup.picasso.PicassoProvider;
 
 import org.lucasr.layoutsamples.adapter.TweetPresenter.UpdateFlags;
 import org.lucasr.layoutsamples.app.R;
@@ -35,7 +36,8 @@ public class ImageUtils {
     public static void loadImage(Context context, ImageView view, String url,
                                  EnumSet<UpdateFlags> flags) {
         if (!flags.contains(UpdateFlags.NO_IMAGE_LOADING)) {
-            Picasso.with(context)
+            //Picasso.with(context)
+            Picasso.get()
                    .load(url)
                    .placeholder(R.drawable.tweet_placeholder_image)
                    .error(R.drawable.tweet_placeholder_image)
@@ -49,7 +51,8 @@ public class ImageUtils {
                                  ImageElementTarget target, String url,
                                  EnumSet<UpdateFlags> flags) {
         if (!flags.contains(UpdateFlags.NO_IMAGE_LOADING)) {
-            Picasso.with(context)
+            //Picasso.with(context)
+            Picasso.get()
                    .load(url)
                    .placeholder(R.drawable.tweet_placeholder_image)
                    .error(R.drawable.tweet_placeholder_image)

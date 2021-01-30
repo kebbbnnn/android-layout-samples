@@ -59,6 +59,8 @@ public interface UIElement {
     public Context getContext();
     public Resources getResources();
 
+    public void setBackgroundColor(int color);
+
     public void requestLayout();
     public void invalidate();
 

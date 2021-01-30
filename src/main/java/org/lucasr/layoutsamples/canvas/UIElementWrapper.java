@@ -156,6 +156,9 @@ public class UIElementWrapper implements UIElement {
     }
 
     @Override
+    public void setBackgroundColor(int color) { mWrappedElement.setBackgroundColor(color); }
+
+    @Override
     public void requestLayout() {
         mWrappedElement.requestLayout();
     }

@@ -3,98 +3,98 @@
         "authorName": "Calvin (1)",
         "message": "Sometimes I think the surest sign that intelligent life exists elsewhere inthe universe is that none of it has tried to contact us.",
         "id": 1,
-        "profileImageUrl": "http://lorempixel.com/180/180/people?id=1"
+        "profileImageUrl": "https://picsum.photos/id/1/180"
     },
     {
         "authorName": "Calvin Coolidge (2)",
         "message": "You don't have to explain something you never said.",
         "id": 2,
-        "profileImageUrl": "http://lorempixel.com/180/180/people?id=2"
+        "profileImageUrl": "https://picsum.photos/id/2/180"
     },
     {
         "authorName": "Calvin Coolidge (3)",
         "message": "When more and more people are thrown out of work,unemployment results.",
         "id": 3,
-        "profileImageUrl": "http://lorempixel.com/180/180/people?id=3"
+        "profileImageUrl": "https://picsum.photos/id/3/180"
     },
     {
-        "postImageUrl": "http://lorempixel.com/960/360/abstract?id=5",
+        "postImageUrl": "https://picsum.photos/960/360",
         "authorName": "Calvin (5)",
         "message": "I thrive on change... I thrive on making other people change.",
         "id": 5,
-        "profileImageUrl": "http://lorempixel.com/180/180/people?id=5"
+        "profileImageUrl": "https://picsum.photos/id/4/180"
     },
     {
         "authorName": "Calvin (6)",
         "message": "I like to say quark! Quark, quark, quark, quark!",
         "id": 6,
-        "profileImageUrl": "http://lorempixel.com/180/180/people?id=6"
+        "profileImageUrl": "https://picsum.photos/id/5/180"
     },
     {
         "authorName": "Calvin (7)",
         "message": "I suppose the secret to happiness is learning to appreciate the moment.",
         "id": 7,
-        "profileImageUrl": "http://lorempixel.com/180/180/people?id=7"
+        "profileImageUrl": "https://picsum.photos/180"
     },
     {
         "authorName": "Calvin (8)",
         "message": "This is so cool I've to go to the bathroom.",
         "id": 8,
-        "profileImageUrl": "http://lorempixel.com/180/180/people?id=8"
+        "profileImageUrl": "https://picsum.photos/180"
     },
     {
         "authorName": "Calvin (9)",
         "message": "If you couldn't find any weirdness, maybe we'll just have to make some!",
         "id": 9,
-        "profileImageUrl": "http://lorempixel.com/180/180/people?id=9"
+        "profileImageUrl": "https://picsum.photos/180"
     },
     {
         "authorName": "Calvin (10)",
         "message": "I don't need to compromise my principles, because they don't have theslightest bearing on what happens to me anyway.",
         "id": 10,
-        "profileImageUrl": "http://lorempixel.com/180/180/people?id=10"
+        "profileImageUrl": "https://picsum.photos/180"
     },
     {
         "authorName": "Calvin (11)",
         "message": "I like to say quark! Quark, quark, quark, quark!",
         "id": 11,
-        "profileImageUrl": "http://lorempixel.com/180/180/people?id=11"
+        "profileImageUrl": "https://picsum.photos/180"
     },
     {
         "authorName": "Calvin (12)",
         "message": "Mom knows EVERYTHING",
         "id": 12,
-        "profileImageUrl": "http://lorempixel.com/180/180/people?id=12"
+        "profileImageUrl": "https://picsum.photos/180"
     },
     {
         "authorName": "Hobbes (14)",
         "message": "I suppose if we couldn't laugh at things that don't make sense, we couldn'treact to a lot of life.",
         "id": 14,
-        "profileImageUrl": "http://lorempixel.com/180/180/people?id=14"
+        "profileImageUrl": "https://picsum.photos/180"
     },
     {
         "authorName": "Calvin Coolidge (15)",
         "message": "When large numbers of men are unable to find work, unemployment results.",
         "id": 15,
-        "profileImageUrl": "http://lorempixel.com/180/180/people?id=15"
+        "profileImageUrl": "https://picsum.photos/180"
     },
     {
         "authorName": "Calvin (16)",
         "message": "There's never enough time to do all the nothing you want.",
         "id": 16,
-        "profileImageUrl": "http://lorempixel.com/180/180/people?id=16"
+        "profileImageUrl": "https://picsum.photos/180"
     },
     {
         "authorName": "Calvin (17)",
         "message": "Someday I'll write my own philosophy book.",
         "id": 17,
-        "profileImageUrl": "http://lorempixel.com/180/180/people?id=17"
+        "profileImageUrl": "https://picsum.photos/180"
     },
     {
         "authorName": "Calvin (18)",
         "message": "If you want to stay dad you've got to polish your image. I think the imagewe need to create for you is repentant but learning.",
         "id": 18,
-        "profileImageUrl": "http://lorempixel.com/180/180/people?id=18"
+        "profileImageUrl": "https://picsum.photos/180"
     },
     {
         "authorName": "Calvin Coolidge (21)",
@@ -103,7 +103,7 @@
         "profileImageUrl": "http://lorempixel.com/180/180/people?id=21"
     },
     {
-        "postImageUrl": "http://lorempixel.com/960/360/abstract?id=22",
+        "postImageUrl": "https://picsum.photos/960/360",
         "authorName": "Calvin (22)",
         "message": "Why should I have to work for everything? It's like saying that I don'tdeserve it.",
         "id": 22,
@@ -122,7 +122,7 @@
         "profileImageUrl": "http://lorempixel.com/180/180/people?id=24"
     },
     {
-        "postImageUrl": "http://lorempixel.com/960/360/abstract?id=25",
+        "postImageUrl": "https://picsum.photos/960/360",
         "authorName": "Calvin (25)",
         "message": "It's great to have a friend who appreciates an earnest discussion ofideas.",
         "id": 25,
@@ -141,7 +141,7 @@
         "profileImageUrl": "http://lorempixel.com/180/180/people?id=27"
     },
     {
-        "postImageUrl": "http://lorempixel.com/960/360/abstract?id=28",
+        "postImageUrl": "https://picsum.photos/960/360",
         "authorName": "Calvin (28)",
         "message": "If you do the job badly enough, sometimes you don't get asked to do itagain.",
         "id": 28,

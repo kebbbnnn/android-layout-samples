@@ -20,6 +20,7 @@ import android.content.Context;
 import android.content.res.Resources;
 import android.content.res.TypedArray;
 import android.graphics.Canvas;
+import android.graphics.Paint;
 import android.graphics.Rect;
 import android.util.AttributeSet;
 import android.util.Log;
@@ -40,6 +41,9 @@ public abstract class AbstractUIElement implements UIElement {
     private Rect mBounds = new Rect();
     private Rect mPadding = new Rect();
     private Rect mTouchBounds = new Rect();
+
+    private Paint mBackgroundColorPaint;
+    private int mBackgroundColor = 0x00000000;
 
     private LayoutParams mLayoutParams;
 
@@ -226,6 +230,10 @@ public abstract class AbstractUIElement implements UIElement {
         final int saveCount = canvas.getSaveCount();
         canvas.save();
 
+        if (mBackgroundColorPaint != null) {
+            canvas.drawRect(mBounds.left, mBounds.top, mBounds.right, mBounds.bottom, mBackgroundColorPaint);
+        }
+
         canvas.clipRect(mBounds);
         canvas.translate(mBounds.left, mBounds.top);
 
@@ -233,6 +241,7 @@ public abstract class AbstractUIElement implements UIElement {
 
         canvas.restoreToCount(saveCount);
     }
+
 
     @Override
     public final void measure(int widthMeasureSpec, int heightMeasureSpec) {
@@ -306,6 +315,14 @@ public abstract class AbstractUIElement implements UIElement {
     @Override
     public Resources getResources() {
         return mHost.getResources();
+    }
+
+    @Override
+    public void setBackgroundColor(int color) {
+        if (mBackgroundColorPaint == null) {
+            mBackgroundColorPaint = new Paint();
+        }
+        mBackgroundColorPaint.setColor(color);
     }
 
     @Override

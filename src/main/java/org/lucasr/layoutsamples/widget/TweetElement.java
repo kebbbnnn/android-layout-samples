@@ -17,6 +17,7 @@
 package org.lucasr.layoutsamples.widget;
 
 import android.content.res.Resources;
+import android.graphics.Color;
 import android.text.TextUtils;
 import android.util.AttributeSet;
 import android.util.Log;
@@ -40,6 +41,7 @@ import org.lucasr.layoutsamples.util.ImageUtils;
 
 import java.util.EnumMap;
 import java.util.EnumSet;
+import java.util.Random;
 
 public class TweetElement extends UIElementGroup implements TweetPresenter {
     private ImageElement mProfileImage;
@@ -72,6 +74,8 @@ public class TweetElement extends UIElementGroup implements TweetPresenter {
         mProfileImageTarget = new ImageElementTarget(res, mProfileImage);
         mPostImageTarget = new ImageElementTarget(res, mPostImage);
 
+        //mMessageText.setBackgroundColor(Color.RED);
+
         mActionIcons = new EnumMap(Action.class);
         for (final Action action : Action.values()) {
             final int elementId;
@@ -92,6 +96,9 @@ public class TweetElement extends UIElementGroup implements TweetPresenter {
                     throw new IllegalArgumentException("Unrecognized tweet action");
             }
             UIElement actionElement = findElementById(elementId);
+            Random rnd = new Random();
+            int color = Color.argb(255, rnd.nextInt(256), rnd.nextInt(256), rnd.nextInt(256));
+            actionElement.setBackgroundColor(color);
             actionElement.setOnClickListener(new UIElement.OnClickListener() {
                 @Override
                 public void onClick(UIElement element) {
@@ -137,7 +144,8 @@ public class TweetElement extends UIElementGroup implements TweetPresenter {
             return;
         }
 
-        Picasso.with(getContext()).cancelRequest(target);
+        Picasso.get().cancelRequest(target);
+        //Picasso.with(getContext()).cancelRequest(target);
     }
 
     @Override
