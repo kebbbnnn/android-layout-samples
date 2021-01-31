@@ -16,6 +16,7 @@
 
 package org.lucasr.layoutsamples.canvas;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.graphics.Canvas;
 import android.util.AttributeSet;
@@ -117,6 +118,7 @@ public class UIElementView extends View implements UIElementHost {
         }
     }
 
+    @SuppressLint("MissingSuperCall")
     @Override
     public void drawableStateChanged() {
         if (mUIElement != null) {

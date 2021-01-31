@@ -17,6 +17,7 @@
 package org.lucasr.layoutsamples.adapter;
 
 import android.content.Context;
+import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -32,6 +33,8 @@ import java.util.EnumSet;
 import java.util.List;
 
 public class TweetsAdapter extends BaseAdapter {
+    private static final boolean DELAY_LOADING = false; //Test on loading delay
+
     private final Context mContext;
     private int mPresenterId;
 
@@ -40,7 +43,19 @@ public class TweetsAdapter extends BaseAdapter {
     public TweetsAdapter(Context context, int presenterId) {
         mContext = context;
         mPresenterId = presenterId;
-        loadFromResource(R.raw.tweets);
+
+        if (DELAY_LOADING) {
+            final Handler handler = new Handler();
+            handler.postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    loadFromResource(R.raw.tweets);
+                    notifyDataSetChanged();
+                }
+            }, 5000);
+        } else {
+            loadFromResource(R.raw.tweets);
+        }
     }
 
     private void loadFromResource(int resID) {
@@ -64,12 +79,12 @@ public class TweetsAdapter extends BaseAdapter {
 
     @Override
     public int getCount() {
-        return sEntries.size();
+        return sEntries != null ? sEntries.size() : 0;
     }
 
     @Override
     public Object getItem(int position) {
-        return sEntries.get(position);
+        return sEntries != null ? sEntries.get(position) : null;
     }
 
     @Override
@@ -89,7 +104,7 @@ public class TweetsAdapter extends BaseAdapter {
 
     @Override
     public long getItemId(int position) {
-        return sEntries.get(position).getId();
+        return sEntries != null ? sEntries.get(position).getId() : 0;
     }
 
     @Override
