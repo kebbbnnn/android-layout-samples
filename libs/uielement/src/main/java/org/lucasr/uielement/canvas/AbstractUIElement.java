@@ -310,10 +310,18 @@ public abstract class AbstractUIElement implements UIElement {
 
     @Override
     public void setBackgroundColor(int color) {
+        if (mBackgroundColor == color) {
+            return;
+        }
+        mBackgroundColor = color;
+
         if (mBackgroundColorPaint == null) {
             mBackgroundColorPaint = new Paint();
         }
-        mBackgroundColorPaint.setColor(color);
+
+        mBackgroundColorPaint.setColor(mBackgroundColor);
+
+        requestLayout();
     }
 
     @Override
