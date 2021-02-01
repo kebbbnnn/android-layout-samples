@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package org.lucasr.layoutsamples.canvas;
+package org.lucasr.uielement.canvas;
 
 import android.content.Context;
 import android.content.res.Resources;
@@ -23,12 +23,11 @@ import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.Rect;
 import android.util.AttributeSet;
-import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup.LayoutParams;
 
-import org.lucasr.layoutsamples.app.R;
+import org.lucasr.uielement.R;
 
 public abstract class AbstractUIElement implements UIElement {
     protected UIElementHost mHost;
@@ -64,29 +63,21 @@ public abstract class AbstractUIElement implements UIElement {
         for (int i = 0; i < indexCount; i++) {
             final int attr = a.getIndex(i);
 
-            switch (attr) {
-                case R.styleable.UIElement_android_padding:
-                    final int padding = a.getDimensionPixelSize(attr, 0);
-                    mPadding.left = mPadding.top = mPadding.right = mPadding.bottom = padding;
-                    break;
-                case R.styleable.UIElement_android_paddingLeft:
-                    mPadding.left = a.getDimensionPixelSize(attr, 0);
-                    break;
-                case R.styleable.UIElement_android_paddingTop:
-                    mPadding.top = a.getDimensionPixelSize(attr, 0);
-                    break;
-                case R.styleable.UIElement_android_paddingRight:
-                    mPadding.right = a.getDimensionPixelSize(attr, 0);
-                    break;
-                case R.styleable.UIElement_android_paddingBottom:
-                    mPadding.bottom = a.getDimensionPixelSize(attr, 0);
-                    break;
-                case R.styleable.UIElement_android_id:
-                    mId = a.getResourceId(attr, -1);
-                    break;
-                case R.styleable.UIElement_android_visibility:
-                    mVisibility = a.getInt(attr, View.VISIBLE);
-                    break;
+            if (attr == R.styleable.UIElement_android_padding) {
+                final int padding = a.getDimensionPixelSize(attr, 0);
+                mPadding.left = mPadding.top = mPadding.right = mPadding.bottom = padding;
+            } else if (attr == R.styleable.UIElement_android_paddingLeft) {
+                mPadding.left = a.getDimensionPixelSize(attr, 0);
+            } else if (attr == R.styleable.UIElement_android_paddingTop) {
+                mPadding.top = a.getDimensionPixelSize(attr, 0);
+            } else if (attr == R.styleable.UIElement_android_paddingRight) {
+                mPadding.right = a.getDimensionPixelSize(attr, 0);
+            } else if (attr == R.styleable.UIElement_android_paddingBottom) {
+                mPadding.bottom = a.getDimensionPixelSize(attr, 0);
+            } else if (attr == R.styleable.UIElement_android_id) {
+                mId = a.getResourceId(attr, -1);
+            } else if (attr == R.styleable.UIElement_android_visibility) {
+                mVisibility = a.getInt(attr, View.VISIBLE);
             }
         }
 

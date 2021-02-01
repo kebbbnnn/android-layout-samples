@@ -14,13 +14,12 @@
  * limitations under the License.
  */
 
-package org.lucasr.layoutsamples.canvas;
+package org.lucasr.uielement.canvas;
 
 import android.content.Context;
 import android.content.res.Resources;
 import android.graphics.Canvas;
 import android.view.MotionEvent;
-import android.view.View;
 import android.view.ViewGroup;
 
 public class UIElementWrapper implements UIElement {

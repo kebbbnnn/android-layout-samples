@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package org.lucasr.layoutsamples.canvas;
+package org.lucasr.uielement.canvas;
 
 import android.content.res.ColorStateList;
 import android.content.res.Resources;
@@ -34,7 +34,7 @@ import android.view.View.MeasureSpec;
 import android.view.ViewGroup;
 import android.view.ViewGroup.LayoutParams;
 
-import org.lucasr.layoutsamples.app.R;
+import org.lucasr.uielement.R;
 
 public class TextElement extends AbstractUIElement {
     private static final String LOGTAG = "TextElement";
@@ -79,45 +79,37 @@ public class TextElement extends AbstractUIElement {
         for (int i = 0; i < indexCount; i++) {
             final int attr = a.getIndex(i);
 
-            switch (attr) {
-                case R.styleable.TextElement_android_textSize:
-                    final int textSize = a.getDimensionPixelSize(attr, -1);
-                    if (textSize >= 0) {
-                        setRawTextSize(textSize);
-                    }
-                    break;
-
-                case R.styleable.TextElement_android_textColor:
-                    final ColorStateList textColors = a.getColorStateList(attr);
-                    if (textColors != null) {
-                        setTextColor(textColors);
-                    }
-                    break;
-
-                case R.styleable.TextElement_android_maxLines:
-                    final int maxLines = a.getInt(attr, -1);
-                    if (maxLines > 0) {
-                        setMaxLines(maxLines);
-                    }
-                    break;
-
-                case R.styleable.TextElement_android_ellipsize:
-                    final int ellipsize = a.getInt(attr, -1);
-                    switch (ellipsize) {
-                        case 1:
-                            setEllipsize(TextUtils.TruncateAt.START);
-                            break;
-                        case 2:
-                            setEllipsize(TextUtils.TruncateAt.MIDDLE);
-                            break;
-                        case 3:
-                            setEllipsize(TextUtils.TruncateAt.END);
-                            break;
-                        case 4:
-                            Log.w(LOGTAG, "Marquee ellipsize is not supported");
-                            break;
-                    }
-                    break;
+            if (attr == R.styleable.TextElement_android_textSize) {
+                final int textSize = a.getDimensionPixelSize(attr, -1);
+                if (textSize >= 0) {
+                    setRawTextSize(textSize);
+                }
+            } else if (attr == R.styleable.TextElement_android_textColor) {
+                final ColorStateList textColors = a.getColorStateList(attr);
+                if (textColors != null) {
+                    setTextColor(textColors);
+                }
+            } else if (attr == R.styleable.TextElement_android_maxLines) {
+                final int maxLines = a.getInt(attr, -1);
+                if (maxLines > 0) {
+                    setMaxLines(maxLines);
+                }
+            } else if (attr == R.styleable.TextElement_android_ellipsize) {
+                final int ellipsize = a.getInt(attr, -1);
+                switch (ellipsize) {
+                    case 1:
+                        setEllipsize(TruncateAt.START);
+                        break;
+                    case 2:
+                        setEllipsize(TruncateAt.MIDDLE);
+                        break;
+                    case 3:
+                        setEllipsize(TruncateAt.END);
+                        break;
+                    case 4:
+                        Log.w(LOGTAG, "Marquee ellipsize is not supported");
+                        break;
+                }
             }
         }
 

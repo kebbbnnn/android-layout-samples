@@ -31,12 +31,12 @@ import com.squareup.picasso.Target;
 import org.lucasr.layoutsamples.adapter.Tweet;
 import org.lucasr.layoutsamples.adapter.TweetPresenter;
 import org.lucasr.layoutsamples.app.R;
-import org.lucasr.layoutsamples.canvas.UIElementGroup;
-import org.lucasr.layoutsamples.canvas.ImageElement;
-import org.lucasr.layoutsamples.canvas.TextElement;
-import org.lucasr.layoutsamples.canvas.UIElement;
-import org.lucasr.layoutsamples.canvas.UIElementHost;
-import org.lucasr.layoutsamples.canvas.UIElementInflater;
+import org.lucasr.uielement.canvas.UIElementGroup;
+import org.lucasr.uielement.canvas.ImageElement;
+import org.lucasr.uielement.canvas.TextElement;
+import org.lucasr.uielement.canvas.UIElement;
+import org.lucasr.uielement.canvas.UIElementHost;
+import org.lucasr.uielement.canvas.UIElementInflater;
 import org.lucasr.layoutsamples.util.ImageUtils;
 
 import java.util.EnumMap;

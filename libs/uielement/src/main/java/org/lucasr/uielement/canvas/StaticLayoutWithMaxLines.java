@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package org.lucasr.layoutsamples.canvas;
+package org.lucasr.uielement.canvas;
 
 import android.os.Build;
 import android.text.Layout.Alignment;

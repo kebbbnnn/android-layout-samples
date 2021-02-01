@@ -19,9 +19,8 @@ package org.lucasr.layoutsamples.async;
 import android.content.Context;
 import android.content.res.Resources;
 import android.graphics.drawable.Drawable;
-import android.view.ViewGroup.LayoutParams;
 
-import org.lucasr.layoutsamples.canvas.UIElementHost;
+import org.lucasr.uielement.canvas.UIElementHost;
 
 public class HeadlessElementHost implements UIElementHost {
     private final Context mContext;

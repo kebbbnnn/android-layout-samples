@@ -14,12 +14,11 @@
  * limitations under the License.
  */
 
-package org.lucasr.layoutsamples.canvas;
+package org.lucasr.uielement.canvas;
 
 import android.content.Context;
 import android.content.res.Resources;
 import android.graphics.drawable.Drawable;
-import android.view.ViewGroup.LayoutParams;
 
 public interface UIElementHost {
     public void requestLayout();

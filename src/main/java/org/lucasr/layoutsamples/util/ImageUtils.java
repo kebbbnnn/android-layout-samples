@@ -20,11 +20,10 @@ import android.content.Context;
 import android.widget.ImageView;
 
 import com.squareup.picasso.Picasso;
-import com.squareup.picasso.PicassoProvider;
 
 import org.lucasr.layoutsamples.adapter.TweetPresenter.UpdateFlags;
 import org.lucasr.layoutsamples.app.R;
-import org.lucasr.layoutsamples.canvas.ImageElement;
+import org.lucasr.uielement.canvas.ImageElement;
 import org.lucasr.layoutsamples.widget.ImageElementTarget;
 
 import java.util.EnumSet;

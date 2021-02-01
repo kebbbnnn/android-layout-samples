@@ -15,7 +15,7 @@
  * limitations under the License.
  */
 
-package org.lucasr.layoutsamples.canvas;
+package org.lucasr.uielement.canvas;
 
 import android.util.Log;
 import android.view.InflateException;
@@ -232,7 +232,7 @@ public class UIElementInflater {
 
     protected UIElement onCreateElement(String name, AttributeSet attrs)
             throws ClassNotFoundException {
-        return createElement(name, "org.lucasr.layoutsamples.canvas.", attrs);
+        return createElement(name, "org.lucasr.uielement.canvas.", attrs);
     }
 
     protected UIElement onCreateElement(UIElement parent, String name, AttributeSet attrs)

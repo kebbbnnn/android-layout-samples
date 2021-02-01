@@ -15,7 +15,7 @@
  * limitations under the License.
  */
 
-package org.lucasr.layoutsamples.canvas;
+package org.lucasr.uielement.canvas;
 
 import android.graphics.Canvas;
 import android.util.AttributeSet;

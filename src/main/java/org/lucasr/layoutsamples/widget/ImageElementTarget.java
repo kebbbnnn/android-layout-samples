@@ -27,7 +27,7 @@ import com.squareup.picasso.Picasso;
 import com.squareup.picasso.Target;
 
 import org.lucasr.layoutsamples.app.R;
-import org.lucasr.layoutsamples.canvas.ImageElement;
+import org.lucasr.uielement.canvas.ImageElement;
 
 public class ImageElementTarget implements Target {
     private final Resources mResources;

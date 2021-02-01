@@ -17,12 +17,11 @@
 package org.lucasr.layoutsamples.widget;
 
 import android.content.Context;
-import android.graphics.drawable.Drawable;
 import android.util.AttributeSet;
 
 import org.lucasr.layoutsamples.adapter.Tweet;
 import org.lucasr.layoutsamples.adapter.TweetPresenter;
-import org.lucasr.layoutsamples.canvas.UIElementView;
+import org.lucasr.uielement.canvas.UIElementView;
 
 import java.util.EnumSet;
 

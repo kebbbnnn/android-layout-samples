@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package org.lucasr.layoutsamples.canvas;
+package org.lucasr.uielement.canvas;
 
 import android.content.res.Resources;
 import android.content.res.TypedArray;
@@ -30,7 +30,7 @@ import android.view.View;
 import android.view.View.MeasureSpec;
 import android.widget.ImageView.ScaleType;
 
-import org.lucasr.layoutsamples.app.R;
+import org.lucasr.uielement.R;
 
 public class ImageElement extends AbstractUIElement implements Drawable.Callback {
     private static final String LOGTAG = "ImageElement";
@@ -76,20 +76,16 @@ public class ImageElement extends AbstractUIElement implements Drawable.Callback
         for (int i = 0; i < indexCount; i++) {
             final int attr = a.getIndex(i);
 
-            switch (attr) {
-                case R.styleable.ImageElement_android_src:
-                    final Drawable d = a.getDrawable(attr);
-                    if (d != null) {
-                        setImageDrawable(d);
-                    }
-                    break;
-
-                case R.styleable.ImageElement_android_scaleType:
-                    final int index = a.getInt(attr, -1);
-                    if (index >= 0) {
-                        setScaleType(sScaleTypeArray[index]);
-                    }
-                    break;
+            if (attr == R.styleable.ImageElement_android_src) {
+                final Drawable d = a.getDrawable(attr);
+                if (d != null) {
+                    setImageDrawable(d);
+                }
+            } else if (attr == R.styleable.ImageElement_android_scaleType) {
+                final int index = a.getInt(attr, -1);
+                if (index >= 0) {
+                    setScaleType(sScaleTypeArray[index]);
+                }
             }
         }
 

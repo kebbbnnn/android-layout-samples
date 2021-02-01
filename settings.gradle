@@ -1,1 +1,2 @@
+include ':libs:uielement'
 include ':libs:smoothie'

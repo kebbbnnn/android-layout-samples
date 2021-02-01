@@ -16,23 +16,17 @@
 
 package org.lucasr.layoutsamples.async;
 
-import android.content.Context;
 import android.content.res.Resources;
 import android.graphics.Canvas;
 import android.graphics.Paint;
-import android.graphics.drawable.Drawable;
 import android.os.Looper;
 import android.text.TextUtils;
-import android.view.View;
-
-import com.squareup.picasso.Picasso;
 
 import org.lucasr.layoutsamples.adapter.Tweet;
 import org.lucasr.layoutsamples.app.R;
 import org.lucasr.layoutsamples.widget.TweetElement;
 import org.lucasr.layoutsamples.adapter.TweetPresenter;
-import org.lucasr.layoutsamples.canvas.UIElementHost;
-import org.lucasr.layoutsamples.canvas.UIElementWrapper;
+import org.lucasr.uielement.canvas.UIElementWrapper;
 
 import java.util.EnumSet;
 

@@ -22,7 +22,7 @@ import android.widget.Adapter;
 
 import org.lucasr.layoutsamples.adapter.Tweet;
 import org.lucasr.layoutsamples.app.App;
-import org.lucasr.layoutsamples.canvas.UIElement;
+import org.lucasr.uielement.canvas.UIElement;
 import org.lucasr.smoothie.SimpleItemLoader;
 
 public class TweetsLayoutLoader extends SimpleItemLoader<Tweet, UIElement> {

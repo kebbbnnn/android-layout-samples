@@ -17,14 +17,11 @@
 package org.lucasr.layoutsamples.async;
 
 import android.content.Context;
-import android.graphics.drawable.Drawable;
 import android.util.AttributeSet;
 
-import org.lucasr.layoutsamples.app.App;
 import org.lucasr.layoutsamples.adapter.Tweet;
 import org.lucasr.layoutsamples.adapter.TweetPresenter;
-import org.lucasr.layoutsamples.canvas.UIElement;
-import org.lucasr.layoutsamples.canvas.UIElementView;
+import org.lucasr.uielement.canvas.UIElementView;
 
 import java.util.EnumSet;
 
