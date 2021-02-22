@@ -27,6 +27,10 @@ import org.lucasr.smoothie.AsyncListView;
 import org.lucasr.smoothie.ItemManager;
 
 public class TweetsListView extends AsyncListView {
+    private static final int CPU_COUNT = Runtime.getRuntime().availableProcessors();
+    private static final int CORE_POOL_SIZE = CPU_COUNT + 1;
+    private static final int MAXIMUM_POOL_SIZE = CPU_COUNT * 2 + 1;
+
     private TweetsAdapter mTweetsAdapter;
     private int mPresenterId;
 
@@ -64,7 +68,7 @@ public class TweetsListView extends AsyncListView {
 
             ItemManager.Builder builder = new ItemManager.Builder(loader);
             builder.setPreloadItemsEnabled(true).setPreloadItemsCount(30);
-            builder.setThreadPoolSize(1);
+            builder.setThreadPoolSize(MAXIMUM_POOL_SIZE); // Source: https://stackoverflow.com/a/30297237/2687048
             setItemManager(builder.build());
         }
     }
