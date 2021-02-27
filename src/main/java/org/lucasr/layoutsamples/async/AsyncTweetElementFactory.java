@@ -33,12 +33,13 @@ public class AsyncTweetElementFactory {
     private static int sTargetWidth;
     private static HeadlessElementHost sHeadlessHost;
 
-    public synchronized static void setTargetWidth(Context context, int targetWidth) {
+    public synchronized static boolean setTargetWidth(Context context, int targetWidth) {
         if (sTargetWidth == targetWidth) {
-            return;
+            return false;
         }
 
         sTargetWidth = targetWidth;
+        return true;
     }
 
     public synchronized static AsyncTweetElement create(Context context, Tweet tweet) {

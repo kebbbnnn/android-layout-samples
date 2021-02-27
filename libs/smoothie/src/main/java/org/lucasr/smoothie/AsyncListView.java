@@ -16,6 +16,7 @@
 
 package org.lucasr.smoothie;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.util.AttributeSet;
 import android.widget.ListAdapter;
@@ -64,6 +65,10 @@ public class AsyncListView extends ListView implements AsyncAbsListView {
         mItemManaged = new ItemManaged(this);
     }
 
+    public boolean hasItemManager() {
+        return mItemManaged.hasItemManager();
+    }
+
     /**
      * Sets an {@link ItemManager} on the {@link AsyncListView}. Once this is
      * set, the {@link AsyncListView} will use its associated {@link ItemLoader}
@@ -90,6 +95,7 @@ public class AsyncListView extends ListView implements AsyncAbsListView {
         }
     }
 
+    @SuppressLint("ClickableViewAccessibility")
     @Override
     public void setOnTouchListener(OnTouchListener l) {
         mItemManaged.setOnTouchListener(l);

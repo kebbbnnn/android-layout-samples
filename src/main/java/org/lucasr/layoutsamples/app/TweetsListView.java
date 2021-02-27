@@ -51,19 +51,20 @@ public class TweetsListView extends AsyncListView {
         final Context context = getContext();
 
         final int targetWidth = getWidth() - getPaddingLeft() + getPaddingRight();
-        AsyncTweetElementFactory.setTargetWidth(context, targetWidth);
-        App.getInstance(context).getElementCache().evictAll();
+        if (AsyncTweetElementFactory.setTargetWidth(context, targetWidth)) {
+            App.getInstance(context).getElementCache().evictAll();
 
-        TweetsAdapter adapter = (TweetsAdapter) getAdapter();
-        if (adapter != null) {
-            adapter.notifyDataSetChanged();
+            TweetsAdapter adapter = (TweetsAdapter) getAdapter();
+            if (adapter != null) {
+                adapter.notifyDataSetChanged();
+            }
         }
     }
 
     private void updateItemLoader() {
         Context context = getContext();
 
-        if (mPresenterId == R.layout.tweet_async_row) {
+        if (mPresenterId == R.layout.tweet_async_row && !hasItemManager()) {
             TweetsLayoutLoader loader = new TweetsLayoutLoader(context);
 
             ItemManager.Builder builder = new ItemManager.Builder(loader);
