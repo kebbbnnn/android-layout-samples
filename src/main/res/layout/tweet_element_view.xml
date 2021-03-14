@@ -50,21 +50,21 @@
         android:layout_marginBottom="@dimen/tweet_content_margin"
         android:scaleType="centerCrop"/>
 
-    <ImageElement
+    <org.lucasr.layoutsamples.canvas.TappableImageElement
         android:id="@+id/reply_action"
         android:layout_width="@dimen/tweet_icon_image_size"
         android:layout_height="@dimen/tweet_icon_image_size"
         android:src="@drawable/tweet_reply"
         android:scaleType="fitStart"/>
 
-    <ImageElement
+    <org.lucasr.layoutsamples.canvas.TappableImageElement
         android:id="@+id/retweet_action"
         android:layout_width="@dimen/tweet_icon_image_size"
         android:layout_height="@dimen/tweet_icon_image_size"
         android:src="@drawable/tweet_retweet"
         android:scaleType="fitStart"/>
 
-    <ImageElement
+    <org.lucasr.layoutsamples.canvas.TappableImageElement
         android:id="@+id/favourite_action"
         android:layout_width="@dimen/tweet_icon_image_size"
         android:layout_height="@dimen/tweet_icon_image_size"

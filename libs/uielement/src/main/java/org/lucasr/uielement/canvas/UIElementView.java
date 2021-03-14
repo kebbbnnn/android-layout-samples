@@ -126,7 +126,10 @@ public class UIElementView extends View implements UIElementHost {
 
     @Override
     public boolean dispatchTouchEvent(MotionEvent event) {
-        return mUIElement != null ? mUIElement.dispatchTouchEvent(event) : super.dispatchTouchEvent(event);
+        if (mUIElement != null) {
+            mUIElement.dispatchTouchEvent(event);
+        }
+        return true;
     }
 
     public UIElement getUIElement() {

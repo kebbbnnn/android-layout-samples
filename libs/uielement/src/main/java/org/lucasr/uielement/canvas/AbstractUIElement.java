@@ -187,13 +187,22 @@ public abstract class AbstractUIElement implements UIElement {
     }
 
     @Override
+    public boolean callOnClick() {
+        if (this.clickListener != null) {
+            this.clickListener.onClick(this);
+            return true;
+        }
+        return false;
+    }
+
+        @Override
     public boolean dispatchTouchEvent(MotionEvent event) {
         if (this instanceof UIElementGroup) {
             UIElementGroup elementGroup = (UIElementGroup) this;
             for (int i = 0, size = elementGroup.getChildCount(); i < size; i++) {
                 UIElement element = elementGroup.getChildAt(i);
 
-                if (!element.dispatchTouchEvent(event)) {
+                if (element.dispatchTouchEvent(event)) {
                     return true;
                 }
             }
@@ -201,19 +210,15 @@ public abstract class AbstractUIElement implements UIElement {
             if(event.getAction() == MotionEvent.ACTION_DOWN) {
                 // Construct a rect of the view's bounds
                 mTouchBounds = new Rect(mBounds.left, mBounds.top, mBounds.right, mBounds.bottom);
-            }
-
-            if(event.getAction() == MotionEvent.ACTION_UP) {
+            } else if(event.getAction() == MotionEvent.ACTION_UP) {
                 if(mTouchBounds != null && mTouchBounds.contains((int) event.getX(), (int) event.getY())) {
                     // User moved inside bounds
-                    if (this.clickListener != null) {
-                        this.clickListener.onClick(this);
-                    }
-                    return false;
+                    this.callOnClick();
+                    return true;
                 }
             }
         }
-        return true;
+        return false;
     }
 
     @Override

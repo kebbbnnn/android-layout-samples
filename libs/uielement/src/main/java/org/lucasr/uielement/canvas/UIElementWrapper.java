@@ -183,6 +183,9 @@ public class UIElementWrapper implements UIElement {
     @Override
     public void setOnClickListener(UIElement.OnClickListener l) { mWrappedElement.setOnClickListener(l); }
 
+    @Override
+    public boolean callOnClick() { return mWrappedElement.callOnClick(); }
+
     public UIElement getWrappedElement() {
         return mWrappedElement;
     }

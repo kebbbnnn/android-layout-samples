@@ -68,6 +68,7 @@ public interface UIElement {
 
     public boolean dispatchTouchEvent(MotionEvent event);
     public void setOnClickListener(UIElement.OnClickListener l);
+    public boolean callOnClick();
 
     public interface OnClickListener {
         void onClick(UIElement element);

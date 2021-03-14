@@ -20,7 +20,9 @@ import android.content.res.Resources;
 import android.content.res.TypedArray;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
+import android.graphics.Color;
 import android.graphics.Matrix;
+import android.graphics.Paint;
 import android.graphics.RectF;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
@@ -46,14 +48,14 @@ public class ImageElement extends AbstractUIElement implements Drawable.Callback
         ScaleType.CENTER_INSIDE
     };
 
-    private Drawable mDrawable;
+    protected Drawable mDrawable;
     private int mResourceId;
 
-    private int mDrawableWidth;
-    private int mDrawableHeight;
+    protected int mDrawableWidth;
+    protected int mDrawableHeight;
 
     private final Matrix mMatrix;
-    private Matrix mDrawMatrix;
+    protected Matrix mDrawMatrix;
 
     private RectF mTempSrc = new RectF();
     private RectF mTempDst = new RectF();
@@ -186,7 +188,7 @@ public class ImageElement extends AbstractUIElement implements Drawable.Callback
         return sS2FArray[st.ordinal() - 1];
     }
 
-    private void updateDrawable(Drawable d) {
+    protected void updateDrawable(Drawable d) {
         if (mDrawable != null) {
             mDrawable.setCallback(null);
             mHost.unscheduleDrawable(mDrawable);
