@@ -16,11 +16,12 @@
 
 package org.lucasr.layoutsamples.widget;
 
+import android.app.Activity;
 import android.content.res.Resources;
-import android.graphics.Color;
 import android.text.TextUtils;
 import android.util.AttributeSet;
 import android.util.Log;
+import android.view.HapticFeedbackConstants;
 import android.view.View;
 import android.view.View.MeasureSpec;
 import android.view.ViewGroup.MarginLayoutParams;
@@ -31,17 +32,16 @@ import com.squareup.picasso.Target;
 import org.lucasr.layoutsamples.adapter.Tweet;
 import org.lucasr.layoutsamples.adapter.TweetPresenter;
 import org.lucasr.layoutsamples.app.R;
-import org.lucasr.uielement.canvas.UIElementGroup;
+import org.lucasr.layoutsamples.util.ImageUtils;
 import org.lucasr.uielement.canvas.ImageElement;
 import org.lucasr.uielement.canvas.TextElement;
 import org.lucasr.uielement.canvas.UIElement;
+import org.lucasr.uielement.canvas.UIElementGroup;
 import org.lucasr.uielement.canvas.UIElementHost;
 import org.lucasr.uielement.canvas.UIElementInflater;
-import org.lucasr.layoutsamples.util.ImageUtils;
 
 import java.util.EnumMap;
 import java.util.EnumSet;
-import java.util.Random;
 
 public class TweetElement extends UIElementGroup implements TweetPresenter {
     private ImageElement mProfileImage;
@@ -96,13 +96,14 @@ public class TweetElement extends UIElementGroup implements TweetPresenter {
                     throw new IllegalArgumentException("Unrecognized tweet action");
             }
             UIElement actionElement = findElementById(elementId);
-            Random rnd = new Random();
-            int color = Color.argb(255, rnd.nextInt(256), rnd.nextInt(256), rnd.nextInt(256));
-            actionElement.setBackgroundColor(color);
+            //Random rnd = new Random();
+            //int color = Color.argb(255, rnd.nextInt(256), rnd.nextInt(256), rnd.nextInt(256));
+            //actionElement.setBackgroundColor(color);
             actionElement.setOnClickListener(new UIElement.OnClickListener() {
                 @Override
                 public void onClick(UIElement element) {
                     Log.d(TweetElement.class.getName(), "Action clicked: " + action);
+                    ((Activity) getContext()).getWindow().getDecorView().performHapticFeedback(HapticFeedbackConstants.VIRTUAL_KEY, HapticFeedbackConstants.FLAG_IGNORE_GLOBAL_SETTING);
                 }
             });
 
