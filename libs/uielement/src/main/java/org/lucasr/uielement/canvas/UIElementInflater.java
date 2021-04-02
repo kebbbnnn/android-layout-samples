@@ -17,20 +17,22 @@
 
 package org.lucasr.uielement.canvas;
 
-import android.util.Log;
-import android.view.InflateException;
-import android.view.ViewGroup.LayoutParams;
-import org.xmlpull.v1.XmlPullParser;
-import org.xmlpull.v1.XmlPullParserException;
-
 import android.content.Context;
 import android.content.res.XmlResourceParser;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.util.Xml;
+import android.view.InflateException;
+import android.view.ViewGroup.LayoutParams;
+
+import org.xmlpull.v1.XmlPullParser;
+import org.xmlpull.v1.XmlPullParserException;
 
 import java.io.IOException;
+import java.lang.ref.WeakReference;
 import java.lang.reflect.Constructor;
 import java.util.HashMap;
+import java.util.Map;
 
 public class UIElementInflater {
     private static final String LOGTAG = "UIElementInflater";
@@ -39,24 +41,35 @@ public class UIElementInflater {
     private final Context mContext;
     private final Object[] mConstructorArgs = new Object[2];
 
-    private static UIElementInflater sInstance;
+    private static WeakReference<UIElementInflater> sInstance;
 
     private static final Class<?>[] sConstructorSignature = new Class[] {
         UIElementHost.class,
         AttributeSet.class
     };
 
-    private static final HashMap<String, Constructor<? extends UIElement>> sConstructorMap =
-            new HashMap<String, Constructor<? extends UIElement>>();
+    private static final HashMap<String, Constructor<? extends UIElement>> sConstructorMap = new HashMap<String, Constructor<? extends UIElement>>();
 
     private static final String TAG_MERGE = "merge";
 
+    public void preloadElementConstructors(HashMap<String, Constructor<? extends UIElement>> extraConstructorMap) {
+        if (extraConstructorMap != null) {
+            for (Map.Entry<String, Constructor<? extends UIElement>> entry : extraConstructorMap.entrySet()) {
+                sConstructorMap.put(entry.getKey(), entry.getValue());
+            }
+        }
+        try {
+            sConstructorMap.put(ImageElement.class.getSimpleName(), ImageElement.class.getConstructor(sConstructorSignature));
+            sConstructorMap.put(TextElement.class.getSimpleName(), TextElement.class.getConstructor(sConstructorSignature));
+        } catch (NoSuchMethodException ignore) {}
+    }
+
     public static synchronized UIElementInflater from(Context context) {
-        if (sInstance == null) {
-            sInstance = new UIElementInflater(context.getApplicationContext());
+        if (sInstance == null || sInstance.get() == null) {
+            sInstance = new WeakReference<>(new UIElementInflater(context.getApplicationContext()));
         }
 
-        return sInstance;
+        return sInstance.get();
     }
 
     protected UIElementInflater(Context context) {

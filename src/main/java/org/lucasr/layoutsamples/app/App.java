@@ -18,8 +18,16 @@ package org.lucasr.layoutsamples.app;
 
 import android.app.Application;
 import android.content.Context;
+import android.util.AttributeSet;
 
 import org.lucasr.layoutsamples.async.UIElementCache;
+import org.lucasr.layoutsamples.canvas.TappableImageElement;
+import org.lucasr.uielement.canvas.UIElement;
+import org.lucasr.uielement.canvas.UIElementHost;
+import org.lucasr.uielement.canvas.UIElementInflater;
+
+import java.lang.reflect.Constructor;
+import java.util.HashMap;
 
 public class App extends Application {
     private UIElementCache mElementCache;
@@ -27,6 +35,13 @@ public class App extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
+
+        UIElementInflater.from(this).preloadElementConstructors(new HashMap<String, Constructor<? extends UIElement>>() {{
+            try {
+                put(TappableImageElement.class.getName(), TappableImageElement.class.getConstructor(UIElementHost.class, AttributeSet.class));
+            } catch (NoSuchMethodException ignore) {}
+        }});
+
         mElementCache = new UIElementCache();
     }
 
