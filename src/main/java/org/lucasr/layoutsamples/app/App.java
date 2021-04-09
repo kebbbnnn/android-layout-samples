@@ -22,6 +22,7 @@ import android.util.AttributeSet;
 
 import org.lucasr.layoutsamples.async.UIElementCache;
 import org.lucasr.layoutsamples.canvas.TappableImageElement;
+import org.lucasr.layoutsamples.util.Shared;
 import org.lucasr.uielement.canvas.UIElement;
 import org.lucasr.uielement.canvas.UIElementHost;
 import org.lucasr.uielement.canvas.UIElementInflater;
@@ -35,6 +36,8 @@ public class App extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
+
+        Shared.init(this);
 
         UIElementInflater.from(this).preloadElementConstructors(new HashMap<String, Constructor<? extends UIElement>>() {{
             try {
