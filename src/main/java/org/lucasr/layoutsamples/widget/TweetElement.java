@@ -97,8 +97,8 @@ public class TweetElement extends UIElementGroup implements TweetPresenter {
         mPostImage.setScaleType(ImageView.ScaleType.CENTER_CROP);
         addElement(mPostImage, (ViewGroup.MarginLayoutParams) TweetElementLayout.shared.get(TweetElementLayout.TweetElementParams.POST_IMAGE));
 
-        mProfileImageTarget = new ImageElementTarget(res, mProfileImage);
-        mPostImageTarget = new ImageElementTarget(res, mPostImage);
+        mProfileImageTarget = new ImageElementTarget(res, mProfileImage, true);
+        mPostImageTarget = new ImageElementTarget(res, mPostImage, false);
 
         //mMessageText.setBackgroundColor(Color.RED);
 

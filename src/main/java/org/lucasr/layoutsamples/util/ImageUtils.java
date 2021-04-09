@@ -22,6 +22,8 @@ import android.graphics.BitmapShader;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.Shader;
+import android.graphics.drawable.Drawable;
+import android.graphics.drawable.shapes.Shape;
 import android.widget.ImageView;
 
 import com.squareup.picasso.Picasso;
@@ -30,12 +32,15 @@ import com.squareup.picasso.Transformation;
 
 import org.lucasr.layoutsamples.adapter.TweetPresenter.UpdateFlags;
 import org.lucasr.layoutsamples.app.R;
-import org.lucasr.uielement.canvas.ImageElement;
 import org.lucasr.layoutsamples.widget.ImageElementTarget;
+import org.lucasr.uielement.canvas.ImageElement;
 
 import java.util.EnumSet;
 
 public class ImageUtils {
+    public static final Drawable PLACEHOLDER_DRAWABLE_CIRCLE = Shared.shared.getDrawable(R.drawable.circle_shape);
+    public static final Drawable PLACEHOLDER_DRAWABLE_RECTANGLE = Shared.shared.getDrawable(R.drawable.tweet_placeholder_image);
+
     private static final Transformation CIRCLE_TRANSFORMATION = new CircleTransform();
 
     private ImageUtils() {}
@@ -64,12 +69,25 @@ public class ImageUtils {
             if (circular) {
                 requestCreator.transform(CIRCLE_TRANSFORMATION);
             }
-            requestCreator
-                    .placeholder(R.drawable.tweet_placeholder_image)
-                    .error(R.drawable.tweet_placeholder_image)
-                    .into(target);
+            if (circular) {
+                requestCreator
+                        .placeholder(PLACEHOLDER_DRAWABLE_CIRCLE)
+                        .error(PLACEHOLDER_DRAWABLE_CIRCLE);
+            } else {
+                requestCreator
+                        .placeholder(PLACEHOLDER_DRAWABLE_RECTANGLE)
+                        .error(PLACEHOLDER_DRAWABLE_RECTANGLE);
+            }
+
+            requestCreator.into(target);
         } else {
-            element.setImageResource(R.drawable.tweet_placeholder_image);
+            if (circular) {
+                //element.setImageResource(R.drawable.circle_shape);
+                element.setImageDrawable(PLACEHOLDER_DRAWABLE_CIRCLE);
+            } else {
+                //element.setImageResource(R.drawable.tweet_placeholder_image);
+                element.setImageDrawable(PLACEHOLDER_DRAWABLE_RECTANGLE);
+            }
         }
     }
 

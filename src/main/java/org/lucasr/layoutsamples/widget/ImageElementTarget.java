@@ -27,15 +27,18 @@ import com.squareup.picasso.Picasso;
 import com.squareup.picasso.Target;
 
 import org.lucasr.layoutsamples.app.R;
+import org.lucasr.layoutsamples.util.ImageUtils;
 import org.lucasr.uielement.canvas.ImageElement;
 
 public class ImageElementTarget implements Target {
     private final Resources mResources;
     private final ImageElement mElement;
+    private final boolean mCircular;
 
-    public ImageElementTarget(Resources resources, ImageElement element) {
+    public ImageElementTarget(Resources resources, ImageElement element, boolean circular) {
         mResources = resources;
         mElement = element;
+        mCircular = circular;
     }
 
     @Override
@@ -43,12 +46,16 @@ public class ImageElementTarget implements Target {
         boolean shouldFade = (loadedFrom != Picasso.LoadedFrom.MEMORY);
 
         if (shouldFade) {
-            Drawable placeholder =
-                    mResources.getDrawable(R.drawable.tweet_placeholder_image);
+            //Drawable placeholder = mResources.getDrawable(R.drawable.tweet_placeholder_image);
+            Drawable placeholder = null;
+            if (mCircular) {
+                placeholder = ImageUtils.PLACEHOLDER_DRAWABLE_CIRCLE;
+            } else {
+                placeholder = ImageUtils.PLACEHOLDER_DRAWABLE_RECTANGLE;
+            }
             Drawable bitmapDrawable = new BitmapDrawable(mResources, bitmap);
 
-            TransitionDrawable fadeInDrawable =
-                    new TransitionDrawable(new Drawable[] { placeholder, bitmapDrawable });
+            TransitionDrawable fadeInDrawable = new TransitionDrawable(new Drawable[] { placeholder, bitmapDrawable });
 
             mElement.setImageDrawable(fadeInDrawable);
             fadeInDrawable.startTransition(200);
@@ -59,7 +66,6 @@ public class ImageElementTarget implements Target {
 
     @Override
     public void onBitmapFailed(Exception e, Drawable drawable) {
-        Log.d(ImageElementTarget.class.getName(), "💔 error: " + e.toString());
         mElement.setImageDrawable(drawable);
     }
 
