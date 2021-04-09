@@ -1,6 +1,7 @@
 package org.lucasr.layoutsamples.util;
 
 import android.annotation.SuppressLint;
+import android.app.Application;
 import android.content.Context;
 import android.content.res.Resources;
 import android.graphics.drawable.Drawable;
@@ -10,95 +11,97 @@ import android.support.annotation.DrawableRes;
 import android.support.annotation.IdRes;
 import android.support.annotation.StringRes;
 import android.support.v4.content.ContextCompat;
+import android.util.Log;
 
 import org.lucasr.layoutsamples.app.R;
 
+import java.lang.reflect.InvocationTargetException;
 import java.util.HashMap;
 
 public class Shared {
 
-    @SuppressLint("StaticFieldLeak")
-    private static Shared sInstance;
-
-    private final Context mContext;
-
-    private final HashMap<Integer, Object> mValues =  new HashMap<>();
-
-    private Shared(Context context) {
-        this.mContext = context;
-    }
-
-    public static void init(Context context) {
-        sInstance = new Shared(context.getApplicationContext());
-
-        sInstance.mValues.put(R.dimen.tweet_padding, Shared.getDimensionPixelOffset(R.dimen.tweet_padding));
-        sInstance.mValues.put(R.dimen.tweet_profile_image_size, Shared.getDimensionPixelOffset(R.dimen.tweet_profile_image_size));
-        sInstance.mValues.put(R.dimen.tweet_content_margin, Shared.getDimensionPixelOffset(R.dimen.tweet_content_margin));
-        sInstance.mValues.put(R.dimen.tweet_author_text_size, (float) Shared.getDimensionPixelSize(R.dimen.tweet_author_text_size));
-        sInstance.mValues.put(R.dimen.tweet_message_text_size, (float) Shared.getDimensionPixelSize(R.dimen.tweet_message_text_size));
-        sInstance.mValues.put(R.color.tweet_message_text_color, Shared.getColor(R.color.tweet_message_text_color));
-        sInstance.mValues.put(R.dimen.tweet_post_image_height, Shared.getDimensionPixelOffset(R.dimen.tweet_post_image_height));
-        sInstance.mValues.put(R.dimen.tweet_icon_image_size, Shared.getDimensionPixelOffset(R.dimen.tweet_icon_image_size));
-        sInstance.mValues.put(R.drawable.tweet_reply, Shared.getDrawable(R.drawable.tweet_reply));
-        sInstance.mValues.put(R.drawable.tweet_retweet, Shared.getDrawable(R.drawable.tweet_retweet));
-        sInstance.mValues.put(R.drawable.tweet_favourite, Shared.getDrawable(R.drawable.tweet_favourite));
-    }
-
-    private static void checkInit() {
-        if (sInstance == null) {
-            String thisClassName = Shared.class.getSimpleName();
-            throw new RuntimeException("Instance of " + thisClassName + " not initialized." + " Make sure to call "
-                    + thisClassName + ".init(context) method in you Application class.");
+    private Shared() {
+        Log.e(Shared.class.getName(), "Point X");
+        if (application == null) {
+            application = getApplicationUsingReflection();
         }
     }
 
-    public static <T> T get(int id) {
-        checkInit();
-        return (T) sInstance.mValues.get(id);
+    private static class SingletonHelper {
+        private static final Shared INSTANCE = new Shared();
     }
 
+    private Application application;
+
+    public static Shared shared = SingletonHelper.INSTANCE;
+
     private String getStringRes(@StringRes int id) {
-        return mContext.getString(id);
+        return application.getString(id);
     }
 
     private Drawable getDrawableRes(@DrawableRes int id) {
-        return ContextCompat.getDrawable(mContext, id);
+        return ContextCompat.getDrawable(application, id);
     }
 
     private int getColorRes(@ColorRes int id){
-        return ContextCompat.getColor(mContext, id);
+        return ContextCompat.getColor(application, id);
     }
 
     public int getDimensionPixelOffsetRes(@DimenRes int id) {
-        return mContext.getResources().getDimensionPixelOffset(id);
+        return application.getResources().getDimensionPixelOffset(id);
     }
 
     public int getDimensionPixelSizeRes(@DimenRes int id) {
-        return mContext.getResources().getDimensionPixelSize(id);
+        return application.getResources().getDimensionPixelSize(id);
     }
 
-    public static String getString(@StringRes int id) {
-        checkInit();
-        return sInstance.getStringRes(id);
+    public String getString(@StringRes int id) {
+        return getStringRes(id);
     }
 
-    public static Drawable getDrawable(@DrawableRes int id) {
-        checkInit();
-        return sInstance.getDrawableRes(id);
+    public Drawable getDrawable(@DrawableRes int id) {
+        return getDrawableRes(id);
     }
 
-    public static int getColor(@ColorRes int id) {
-        checkInit();
-        return sInstance.getColorRes(id);
+    public int getColor(@ColorRes int id) {
+        return getColorRes(id);
     }
 
-    public static int getDimensionPixelOffset(@DimenRes int id) {
-        checkInit();
-        return sInstance.getDimensionPixelOffsetRes(id);
+    public int getDimensionPixelOffset(@DimenRes int id) {
+        return getDimensionPixelOffsetRes(id);
     }
 
-    public static int getDimensionPixelSize(@DimenRes int id) {
-        checkInit();
-        return sInstance.getDimensionPixelSizeRes(id);
+    public int getDimensionPixelSize(@DimenRes int id) {
+        return getDimensionPixelSizeRes(id);
+    }
+
+    //TODO: Optimize this
+    @SuppressLint("PrivateApi")
+    public Application getApplicationUsingReflection() {
+        if (null != application) {
+            return application;
+        }
+
+        try {
+            application = (Application) Class.forName("android.app.AppGlobals").getMethod("getInitialApplication").invoke(null, (Object[]) null);
+        } catch (IllegalAccessException ignore) {
+        } catch (InvocationTargetException ignore) {
+        } catch (NoSuchMethodException ignore) {
+        } catch (ClassNotFoundException ignore) {
+        }
+
+        if (null != application) {
+            return application;
+        }
+
+        try {
+            application = (Application) Class.forName("android.app.ActivityThread").getMethod("currentApplication").invoke(null, (Object[]) null);
+        } catch (IllegalAccessException ignore) {
+        } catch (InvocationTargetException ignore) {
+        } catch (NoSuchMethodException ignore) {
+        } catch (ClassNotFoundException ignore) {
+        }
+
+        return application;
     }
 }

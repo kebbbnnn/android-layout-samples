@@ -46,6 +46,7 @@ import org.lucasr.uielement.canvas.UIElementHost;
 
 import java.util.EnumMap;
 import java.util.EnumSet;
+import java.util.HashMap;
 
 public class TweetElement extends UIElementGroup implements TweetPresenter {
     private final ImageElement mProfileImage;
@@ -67,7 +68,7 @@ public class TweetElement extends UIElementGroup implements TweetPresenter {
         final Resources res = getResources();
 
         //int padding = Shared.getDimensionPixelOffset(R.dimen.tweet_padding);
-        int padding = Shared.get(R.dimen.tweet_padding);
+        int padding = (int) TweetElementLayout.shared.get(TweetElementLayout.TweetElementResources.PADDING);
         setPadding(padding, padding, padding, padding);
 
         long startTime = System.nanoTime();
@@ -76,33 +77,25 @@ public class TweetElement extends UIElementGroup implements TweetPresenter {
         //mProfileImage = (ImageElement) findElementById(R.id.profile_image);
         mProfileImage = new ImageElement(host);
         mProfileImage.setScaleType(ImageView.ScaleType.CENTER_CROP);
-        int profileImageSize = Shared.get(R.dimen.tweet_profile_image_size);
-        ViewGroup.MarginLayoutParams profileImageParams = new ViewGroup.MarginLayoutParams(profileImageSize, profileImageSize);
-        profileImageParams.rightMargin = Shared.get(R.dimen.tweet_content_margin);
-        addElement(mProfileImage, profileImageParams);
+        addElement(mProfileImage, (ViewGroup.MarginLayoutParams) TweetElementLayout.shared.get(TweetElementLayout.TweetElementParams.PROFILE_IMAGE));
 
         //mAuthorText = (TextElement) findElementById(R.id.author_text);
         mAuthorText = new TextElement(host);
-        mAuthorText.setRawTextSize((float)Shared.get(R.dimen.tweet_author_text_size));
+        mAuthorText.setRawTextSize((float) TweetElementLayout.shared.get(TweetElementLayout.TweetElementResources.AUTHOR_TEXT_SIZE));
         mAuthorText.setEllipsize(TextUtils.TruncateAt.END);
         mAuthorText.setMaxLines(1);
-        ViewGroup.LayoutParams authorTextParams = new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-        addElement(mAuthorText, authorTextParams);
+        addElement(mAuthorText, TweetElementLayout.shared.get(TweetElementLayout.TweetElementParams.AUTHOR_TEXT));
 
         //mMessageText = (TextElement) findElementById(R.id.message_text);
         mMessageText = new TextElement(host);
-        mMessageText.setRawTextSize((float)Shared.get(R.dimen.tweet_message_text_size));
-        mMessageText.setTextColor((int)Shared.get(R.color.tweet_message_text_color));
-        ViewGroup.MarginLayoutParams messageTextParams = new ViewGroup.MarginLayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-        messageTextParams.bottomMargin = Shared.get(R.dimen.tweet_content_margin);
-        addElement(mMessageText, messageTextParams);
+        mMessageText.setRawTextSize((float) TweetElementLayout.shared.get(TweetElementLayout.TweetElementResources.MESSAGE_TEXT_SIZE));
+        mMessageText.setTextColor((int) TweetElementLayout.shared.get(TweetElementLayout.TweetElementResources.MESSAGE_TEXT_COLOR));
+        addElement(mMessageText, (ViewGroup.MarginLayoutParams) TweetElementLayout.shared.get(TweetElementLayout.TweetElementParams.MESSAGE_TEXT));
 
         //mPostImage = (ImageElement) findElementById(R.id.post_image);
         mPostImage = new ImageElement(host);
         mPostImage.setScaleType(ImageView.ScaleType.CENTER_CROP);
-        ViewGroup.MarginLayoutParams postImageParams = new ViewGroup.MarginLayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, Shared.get(R.dimen.tweet_post_image_height));
-        postImageParams.bottomMargin = Shared.get(R.dimen.tweet_content_margin);
-        addElement(mPostImage, postImageParams);
+        addElement(mPostImage, (ViewGroup.MarginLayoutParams) TweetElementLayout.shared.get(TweetElementLayout.TweetElementParams.POST_IMAGE));
 
         mProfileImageTarget = new ImageElementTarget(res, mProfileImage);
         mPostImageTarget = new ImageElementTarget(res, mPostImage);
@@ -112,21 +105,21 @@ public class TweetElement extends UIElementGroup implements TweetPresenter {
         mActionIcons = new EnumMap(Action.class);
         for (final Action action : Action.values()) {
             //final int elementId;
-            final int drawableId;
+            final TweetElementLayout.TweetElementResources drawableKey;
             switch (action) {
                 case REPLY:
                     //elementId = R.id.reply_action;
-                    drawableId = R.drawable.tweet_reply;
+                    drawableKey = TweetElementLayout.TweetElementResources.DRAWABLE_REPLY;
                     break;
 
                 case RETWEET:
                     //elementId = R.id.retweet_action;
-                    drawableId = R.drawable.tweet_retweet;
+                    drawableKey = TweetElementLayout.TweetElementResources.DRAWABLE_RETWEET;
                     break;
 
                 case FAVOURITE:
                     //elementId = R.id.favourite_action;
-                    drawableId = R.drawable.tweet_favourite;
+                    drawableKey = TweetElementLayout.TweetElementResources.DRAWABLE_FAVOURITE;
                     break;
 
                 default:
@@ -135,10 +128,8 @@ public class TweetElement extends UIElementGroup implements TweetPresenter {
             //UIElement actionElement = findElementById(elementId);
             TappableImageElement actionElement = new TappableImageElement(host);
             actionElement.setScaleType(ImageView.ScaleType.FIT_START);
-            actionElement.setImageDrawable((Drawable) Shared.get(drawableId));
-            int actionElementSize = Shared.get(R.dimen.tweet_icon_image_size);
-            ViewGroup.LayoutParams actionElementParams = new ViewGroup.LayoutParams(actionElementSize, actionElementSize);
-            addElement(actionElement, actionElementParams);
+            actionElement.setImageDrawable((Drawable) TweetElementLayout.shared.get(drawableKey));
+            addElement(actionElement, TweetElementLayout.shared.get(TweetElementLayout.TweetElementParams.ACTION_ELEMENT));
 
             //Random rnd = new Random();
             //int color = Color.argb(255, rnd.nextInt(256), rnd.nextInt(256), rnd.nextInt(256));
@@ -298,12 +289,12 @@ public class TweetElement extends UIElementGroup implements TweetPresenter {
 
     public void loadProfileImage(Tweet tweet, EnumSet<UpdateFlags> flags) {
         ImageUtils.loadImage(getContext(), mProfileImage, mProfileImageTarget,
-                tweet.getProfileImageUrl(), flags);
+                tweet.getProfileImageUrl(), flags, true);
     }
 
     public void loadPostImage(Tweet tweet, EnumSet<UpdateFlags> flags) {
         ImageUtils.loadImage(getContext(), mPostImage, mPostImageTarget,
-                tweet.getPostImageUrl(), flags);
+                tweet.getPostImageUrl(), flags, false);
     }
 
     @Override

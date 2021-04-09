@@ -23,6 +23,8 @@ import android.util.AttributeSet;
 import org.lucasr.layoutsamples.async.UIElementCache;
 import org.lucasr.layoutsamples.canvas.TappableImageElement;
 import org.lucasr.layoutsamples.util.Shared;
+import org.lucasr.layoutsamples.widget.TweetElement;
+import org.lucasr.layoutsamples.widget.TweetElementLayout;
 import org.lucasr.uielement.canvas.UIElement;
 import org.lucasr.uielement.canvas.UIElementHost;
 import org.lucasr.uielement.canvas.UIElementInflater;
@@ -37,13 +39,13 @@ public class App extends Application {
     public void onCreate() {
         super.onCreate();
 
-        Shared.init(this);
+        TweetElementLayout.shared.warmup();
 
-        UIElementInflater.from(this).preloadElementConstructors(new HashMap<String, Constructor<? extends UIElement>>() {{
+        /*UIElementInflater.from(this).preloadElementConstructors(new HashMap<String, Constructor<? extends UIElement>>() {{
             try {
                 put(TappableImageElement.class.getName(), TappableImageElement.class.getConstructor(UIElementHost.class, AttributeSet.class));
             } catch (NoSuchMethodException ignore) {}
-        }});
+        }});*/
 
         mElementCache = new UIElementCache();
     }
