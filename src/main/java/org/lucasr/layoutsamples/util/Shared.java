@@ -31,27 +31,58 @@ public class Shared {
         private static final Shared INSTANCE = new Shared();
     }
 
-    private Application application;
-
     public static Shared shared = SingletonHelper.INSTANCE;
 
+    private Application application;
+    private final HashMap<Integer, Object> mValuesMap = new HashMap<>();
+
     private String getStringRes(@StringRes int id) {
-        return application.getString(id);
+        Object stringObject = mValuesMap.get(id);
+        if (null != stringObject) {
+            return (String) stringObject;
+        }
+        stringObject = application.getString(id);
+        mValuesMap.put(id, stringObject);
+        return (String) stringObject;
     }
 
     private Drawable getDrawableRes(@DrawableRes int id) {
-        return ContextCompat.getDrawable(application, id);
+        Object drawableObject = mValuesMap.get(id);
+        if (null != drawableObject) {
+            return (Drawable) drawableObject;
+        }
+        drawableObject = ContextCompat.getDrawable(application, id);
+        mValuesMap.put(id, drawableObject);
+        return (Drawable) drawableObject;
     }
 
     private int getColorRes(@ColorRes int id){
-        return ContextCompat.getColor(application, id);
+        Object intObject = mValuesMap.get(id);
+        if (null != intObject) {
+            return (int) intObject;
+        }
+        intObject = ContextCompat.getColor(application, id);
+        mValuesMap.put(id, intObject);
+        return (int) intObject;
     }
 
     public int getDimensionPixelOffsetRes(@DimenRes int id) {
-        return application.getResources().getDimensionPixelOffset(id);
+        Object intObject = mValuesMap.get(id);
+        if (null != intObject) {
+            return (int) intObject;
+        }
+        intObject = application.getResources().getDimensionPixelOffset(id);
+        mValuesMap.put(id, intObject);
+        return (int) intObject;
     }
 
     public int getDimensionPixelSizeRes(@DimenRes int id) {
+        Object intObject = mValuesMap.get(id);
+        if (null != intObject) {
+            return (int) intObject;
+        }
+        intObject = application.getResources().getDimensionPixelSize(id);
+        mValuesMap.put(id, intObject);
         return application.getResources().getDimensionPixelSize(id);
     }
 

@@ -46,7 +46,7 @@ public abstract class AbstractUIElement implements UIElement {
 
     private LayoutParams mLayoutParams;
 
-    private UIElement.OnClickListener clickListener;
+    private UIElement.OnClickListener mOnClickListener;
 
     private int mVisibility = View.VISIBLE;
 
@@ -183,13 +183,13 @@ public abstract class AbstractUIElement implements UIElement {
 
     @Override
     public void setOnClickListener(UIElement.OnClickListener clickListener) {
-        this.clickListener = clickListener;
+        mOnClickListener = clickListener;
     }
 
     @Override
     public boolean callOnClick() {
-        if (this.clickListener != null) {
-            this.clickListener.onClick(this);
+        if (null != mOnClickListener) {
+            mOnClickListener.onClick(this);
             return true;
         }
         return false;
@@ -199,23 +199,23 @@ public abstract class AbstractUIElement implements UIElement {
     public boolean dispatchTouchEvent(MotionEvent event) {
         if (this instanceof UIElementGroup) {
             UIElementGroup elementGroup = (UIElementGroup) this;
-            for (int i = 0, size = elementGroup.getChildCount(); i < size; i++) {
-                UIElement element = elementGroup.getChildAt(i);
 
+            for (int i = elementGroup.getChildCount() - 1; i >= 0; i--) {
+                UIElement element = elementGroup.getChildAt(i);
                 if (element.dispatchTouchEvent(event)) {
                     return true;
                 }
             }
-        } else {
-            if(event.getAction() == MotionEvent.ACTION_DOWN) {
-                // Construct a rect of the view's bounds
-                mTouchBounds = new Rect(mBounds.left, mBounds.top, mBounds.right, mBounds.bottom);
-            } else if(event.getAction() == MotionEvent.ACTION_UP) {
-                if(mTouchBounds != null && mTouchBounds.contains((int) event.getX(), (int) event.getY())) {
-                    // User moved inside bounds
-                    this.callOnClick();
-                    return true;
-                }
+        }
+
+        if (event.getAction() == MotionEvent.ACTION_DOWN) {
+            // Construct a rect of the view's bounds
+            mTouchBounds = new Rect(mBounds.left, mBounds.top, mBounds.right, mBounds.bottom);
+        } else if(event.getAction() == MotionEvent.ACTION_UP) {
+            if(null != mOnClickListener && (null != mTouchBounds && mTouchBounds.contains((int) event.getX(), (int) event.getY()))) {
+                // User moved inside bounds
+                callOnClick();
+                return true;
             }
         }
         return false;
