@@ -17,7 +17,6 @@
 package org.lucasr.layoutsamples.async;
 
 import android.content.Context;
-import android.util.Log;
 import android.view.View;
 
 import org.lucasr.layoutsamples.adapter.Tweet;
@@ -25,7 +24,6 @@ import org.lucasr.layoutsamples.adapter.TweetPresenter;
 import org.lucasr.layoutsamples.app.App;
 import org.lucasr.layoutsamples.widget.TweetElement;
 
-import java.lang.ref.WeakReference;
 import java.util.EnumSet;
 
 public class AsyncTweetElementFactory {
@@ -71,27 +69,5 @@ public class AsyncTweetElementFactory {
         elementCache.put(tweet.getId(), asyncElement);
 
         return asyncElement;
-    }
-}
-
-class SafeHeadlessElementHost {
-    private WeakReference<HeadlessElementHost> mHeadlessHost;
-
-    private SafeHeadlessElementHost() {}
-
-    private static class SingletonHelper {
-        private static final SafeHeadlessElementHost INSTANCE = new SafeHeadlessElementHost();
-    }
-
-    public static SafeHeadlessElementHost getInstance(Context context) {
-        SafeHeadlessElementHost instance = SingletonHelper.INSTANCE;
-        if (instance.mHeadlessHost == null || instance.mHeadlessHost.get() == null) {
-            instance.mHeadlessHost = new WeakReference<>(new HeadlessElementHost(context));
-        }
-        return instance;
-    }
-
-    public HeadlessElementHost getHeadlessHost() {
-        return mHeadlessHost.get();
     }
 }
