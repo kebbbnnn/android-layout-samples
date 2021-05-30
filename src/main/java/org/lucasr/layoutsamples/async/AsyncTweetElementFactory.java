@@ -46,6 +46,10 @@ public class AsyncTweetElementFactory {
 
         AsyncTweetElement asyncElement = (AsyncTweetElement) elementCache.get(tweet.getId());
         if (asyncElement != null) {
+            if (!asyncElement.isAttachedToHost()) {
+                final HeadlessElementHost headlessHost = SafeHeadlessElementHost.getInstance(context).getHeadlessHost();
+                asyncElement.swapHost(headlessHost);
+            }
             return asyncElement;
         }
 
