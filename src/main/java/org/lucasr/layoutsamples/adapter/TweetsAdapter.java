@@ -89,15 +89,15 @@ public class TweetsAdapter extends BaseAdapter {
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        final TweetPresenter presenter;
+        final ElementPresenter presenter;
         if (convertView == null) {
-            presenter = (TweetPresenter) LayoutInflater.from(mContext).inflate(mPresenterId, parent, false);
+            presenter = (ElementPresenter) LayoutInflater.from(mContext).inflate(mPresenterId, parent, false);
         } else {
-            presenter = (TweetPresenter) convertView;
+            presenter = (ElementPresenter) convertView;
         }
 
         Tweet tweet = (Tweet) getItem(position);
-        presenter.update(tweet, EnumSet.noneOf(TweetPresenter.UpdateFlags.class));
+        presenter.update(tweet, EnumSet.noneOf(ElementPresenter.UpdateFlags.class));
 
         return (View) presenter;
     }

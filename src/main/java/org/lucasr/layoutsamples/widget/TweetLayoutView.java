@@ -26,14 +26,14 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import org.lucasr.layoutsamples.adapter.Tweet;
-import org.lucasr.layoutsamples.adapter.TweetPresenter;
+import org.lucasr.layoutsamples.adapter.ElementPresenter;
 import org.lucasr.layoutsamples.app.R;
 import org.lucasr.layoutsamples.util.ImageUtils;
 
 import java.util.EnumMap;
 import java.util.EnumSet;
 
-public class TweetLayoutView extends ViewGroup implements TweetPresenter {
+public class TweetLayoutView extends ViewGroup implements ElementPresenter<Tweet> {
     private final ImageView mProfileImage;
     private final TextView mAuthorText;
     private final TextView mMessageText;

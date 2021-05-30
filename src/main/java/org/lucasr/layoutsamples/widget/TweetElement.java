@@ -33,11 +33,9 @@ import com.squareup.picasso.Picasso;
 import com.squareup.picasso.Target;
 
 import org.lucasr.layoutsamples.adapter.Tweet;
-import org.lucasr.layoutsamples.adapter.TweetPresenter;
-import org.lucasr.layoutsamples.app.R;
+import org.lucasr.layoutsamples.adapter.ElementPresenter;
 import org.lucasr.layoutsamples.canvas.TappableImageElement;
 import org.lucasr.layoutsamples.util.ImageUtils;
-import org.lucasr.layoutsamples.util.Shared;
 import org.lucasr.uielement.canvas.ImageElement;
 import org.lucasr.uielement.canvas.TextElement;
 import org.lucasr.uielement.canvas.UIElement;
@@ -46,9 +44,8 @@ import org.lucasr.uielement.canvas.UIElementHost;
 
 import java.util.EnumMap;
 import java.util.EnumSet;
-import java.util.HashMap;
 
-public class TweetElement extends UIElementGroup implements TweetPresenter {
+public class TweetElement extends UIElementGroup implements ElementPresenter<Tweet> {
     private final ImageElement mProfileImage;
     private final TextElement mAuthorText;
     private final TextElement mMessageText;

@@ -23,14 +23,13 @@ import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.Shader;
 import android.graphics.drawable.Drawable;
-import android.graphics.drawable.shapes.Shape;
 import android.widget.ImageView;
 
 import com.squareup.picasso.Picasso;
 import com.squareup.picasso.RequestCreator;
 import com.squareup.picasso.Transformation;
 
-import org.lucasr.layoutsamples.adapter.TweetPresenter.UpdateFlags;
+import org.lucasr.layoutsamples.adapter.ElementPresenter.UpdateFlags;
 import org.lucasr.layoutsamples.app.R;
 import org.lucasr.layoutsamples.widget.ImageElementTarget;
 import org.lucasr.uielement.canvas.ImageElement;

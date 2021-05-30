@@ -25,12 +25,12 @@ import android.text.TextUtils;
 import org.lucasr.layoutsamples.adapter.Tweet;
 import org.lucasr.layoutsamples.app.R;
 import org.lucasr.layoutsamples.widget.TweetElement;
-import org.lucasr.layoutsamples.adapter.TweetPresenter;
+import org.lucasr.layoutsamples.adapter.ElementPresenter;
 import org.lucasr.uielement.canvas.UIElementWrapper;
 
 import java.util.EnumSet;
 
-public class AsyncTweetElement extends UIElementWrapper implements TweetPresenter {
+public class AsyncTweetElement extends UIElementWrapper implements ElementPresenter<Tweet> {
     private final Paint mIndicatorPaint;
     private final int mIndicatorSize;
 

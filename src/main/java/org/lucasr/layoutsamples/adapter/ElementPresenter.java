@@ -16,13 +16,9 @@
 
 package org.lucasr.layoutsamples.adapter;
 
-import android.graphics.drawable.Drawable;
-
-import org.lucasr.layoutsamples.adapter.Tweet;
-
 import java.util.EnumSet;
 
-public interface TweetPresenter {
+public interface ElementPresenter<T> {
     public enum UpdateFlags {
         NO_IMAGE_LOADING
     }
@@ -33,5 +29,5 @@ public interface TweetPresenter {
         FAVOURITE
     }
 
-    public void update(Tweet tweet, EnumSet<UpdateFlags> flags);
+    public void update(T t, EnumSet<UpdateFlags> flags);
 }

@@ -20,12 +20,12 @@ import android.content.Context;
 import android.util.AttributeSet;
 
 import org.lucasr.layoutsamples.adapter.Tweet;
-import org.lucasr.layoutsamples.adapter.TweetPresenter;
+import org.lucasr.layoutsamples.adapter.ElementPresenter;
 import org.lucasr.uielement.canvas.UIElementView;
 
 import java.util.EnumSet;
 
-public class AsyncTweetView extends UIElementView implements TweetPresenter {
+public class AsyncTweetView extends UIElementView implements ElementPresenter<Tweet> {
     private Tweet mTweet;
 
     public AsyncTweetView(Context context, AttributeSet attrs) {
