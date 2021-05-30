@@ -37,6 +37,8 @@ import org.lucasr.layoutsamples.adapter.Tweet;
 import org.lucasr.layoutsamples.canvas.TappableImageElement;
 import org.lucasr.layoutsamples.util.ImageUtils;
 import org.lucasr.uielement.adapter.ElementPresenter;
+import org.lucasr.uielement.adapter.ImagePresenter;
+import org.lucasr.uielement.adapter.UpdateFlags;
 import org.lucasr.uielement.canvas.ImageElement;
 import org.lucasr.uielement.canvas.TextElement;
 import org.lucasr.uielement.canvas.UIElement;
@@ -46,7 +48,7 @@ import org.lucasr.uielement.canvas.UIElementHost;
 import java.util.EnumMap;
 import java.util.EnumSet;
 
-public class TweetElement extends UIElementGroup implements ElementPresenter<Tweet> {
+public class TweetElement extends UIElementGroup implements ElementPresenter<Tweet>, ImagePresenter<Tweet> {
     private final ImageElement mProfileImage;
     private final TextElement mAuthorText;
     private final TextElement mMessageText;
@@ -296,10 +298,7 @@ public class TweetElement extends UIElementGroup implements ElementPresenter<Twe
     }
 
     @Override
-    public void update(Tweet tweet, EnumSet<UpdateFlags> flags) {
-        mAuthorText.setText(tweet.getAuthorName());
-        mMessageText.setText(tweet.getMessage());
-
+    public void load(Tweet tweet, EnumSet<UpdateFlags> flags) {
         loadProfileImage(tweet, flags);
 
         final boolean hasPostImage = !TextUtils.isEmpty(tweet.getPostImageUrl());
@@ -307,5 +306,20 @@ public class TweetElement extends UIElementGroup implements ElementPresenter<Twe
         if (hasPostImage) {
             loadPostImage(tweet, flags);
         }
+    }
+
+    @Override
+    public void update(Tweet tweet, EnumSet<UpdateFlags> flags) {
+        mAuthorText.setText(tweet.getAuthorName());
+        mMessageText.setText(tweet.getMessage());
+
+        load(tweet, flags);
+        /*loadProfileImage(tweet, flags);
+
+        final boolean hasPostImage = !TextUtils.isEmpty(tweet.getPostImageUrl());
+        mPostImage.setVisibility(hasPostImage ? View.VISIBLE : View.GONE);
+        if (hasPostImage) {
+            loadPostImage(tweet, flags);
+        }*/
     }
 }

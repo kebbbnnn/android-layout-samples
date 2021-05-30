@@ -29,9 +29,9 @@ import com.squareup.picasso.Picasso;
 import com.squareup.picasso.RequestCreator;
 import com.squareup.picasso.Transformation;
 
-import org.lucasr.uielement.adapter.ElementPresenter.UpdateFlags;
 import org.lucasr.layoutsamples.app.R;
 import org.lucasr.layoutsamples.widget.ImageElementTarget;
+import org.lucasr.uielement.adapter.UpdateFlags;
 import org.lucasr.uielement.canvas.ImageElement;
 
 import java.util.EnumSet;

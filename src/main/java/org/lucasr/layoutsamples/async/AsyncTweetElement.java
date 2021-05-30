@@ -26,6 +26,8 @@ import org.lucasr.layoutsamples.adapter.Tweet;
 import org.lucasr.layoutsamples.app.R;
 import org.lucasr.layoutsamples.widget.TweetElement;
 import org.lucasr.uielement.adapter.ElementPresenter;
+import org.lucasr.uielement.adapter.ImagePresenter;
+import org.lucasr.uielement.adapter.UpdateFlags;
 import org.lucasr.uielement.canvas.UIElementWrapper;
 
 import java.util.EnumSet;
@@ -69,14 +71,18 @@ public class AsyncTweetElement extends UIElementWrapper implements ElementPresen
         // Do nothing, we never change the wrapped element's layout.
     }
 
+    @SuppressWarnings("unchecked")
     @Override
     public void update(Tweet tweet, EnumSet<UpdateFlags> flags) {
-        TweetElement element = (TweetElement) getWrappedElement();
+        ImagePresenter<Tweet> presenter = (ImagePresenter<Tweet>) getWrappedElement();
+        presenter.load(tweet, flags);
+
+        /*TweetElement element = (TweetElement) getWrappedElement();
         element.loadProfileImage(tweet, flags);
 
         final boolean hasPostImage = !TextUtils.isEmpty(tweet.getPostImageUrl());
         if (hasPostImage) {
             element.loadPostImage(tweet, flags);
-        }
+        }*/
     }
 }

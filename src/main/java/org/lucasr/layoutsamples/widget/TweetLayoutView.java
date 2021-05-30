@@ -30,6 +30,7 @@ import org.lucasr.layoutsamples.adapter.Tweet;
 import org.lucasr.layoutsamples.app.R;
 import org.lucasr.layoutsamples.util.ImageUtils;
 import org.lucasr.uielement.adapter.ElementPresenter;
+import org.lucasr.uielement.adapter.UpdateFlags;
 
 import java.util.EnumMap;
 import java.util.EnumSet;

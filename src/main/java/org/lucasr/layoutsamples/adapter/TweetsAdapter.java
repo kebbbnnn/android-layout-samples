@@ -28,6 +28,7 @@ import org.json.JSONObject;
 import org.lucasr.layoutsamples.app.R;
 import org.lucasr.layoutsamples.util.RawResource;
 import org.lucasr.uielement.adapter.ElementPresenter;
+import org.lucasr.uielement.adapter.UpdateFlags;
 
 import java.util.ArrayList;
 import java.util.EnumSet;
@@ -99,7 +100,7 @@ public class TweetsAdapter extends BaseAdapter {
         }
 
         Tweet tweet = (Tweet) getItem(position);
-        presenter.update(tweet, EnumSet.noneOf(ElementPresenter.UpdateFlags.class));
+        presenter.update(tweet, EnumSet.noneOf(UpdateFlags.class));
 
         return (View) presenter;
     }

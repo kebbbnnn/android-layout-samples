@@ -19,9 +19,5 @@ package org.lucasr.uielement.adapter;
 import java.util.EnumSet;
 
 public interface ElementPresenter<T> {
-    public enum UpdateFlags {
-        NO_IMAGE_LOADING
-    }
-
     public void update(T t, EnumSet<UpdateFlags> flags);
 }
