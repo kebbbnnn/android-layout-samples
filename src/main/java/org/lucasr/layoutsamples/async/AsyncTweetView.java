@@ -20,8 +20,10 @@ import android.content.Context;
 import android.util.AttributeSet;
 
 import org.lucasr.layoutsamples.adapter.Tweet;
+import org.lucasr.layoutsamples.widget.TweetElement;
 import org.lucasr.uielement.adapter.ElementPresenter;
 import org.lucasr.uielement.adapter.UpdateFlags;
+import org.lucasr.uielement.async.AsyncUIElement;
 import org.lucasr.uielement.canvas.UIElementView;
 
 import java.util.EnumSet;
@@ -41,7 +43,7 @@ public class AsyncTweetView extends UIElementView implements ElementPresenter<Tw
     public void update(Tweet tweet, EnumSet<UpdateFlags> flags) {
         mTweet = tweet;
 
-        final AsyncTweetElement element = AsyncTweetElementFactory.create(getContext(), tweet);
+        final AsyncUIElement<TweetElement, Tweet> element = AsyncTweetElementFactory.create(getContext(), tweet);
         setUIElement(element);
 
         element.update(tweet, flags);

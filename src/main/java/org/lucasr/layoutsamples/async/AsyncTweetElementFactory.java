@@ -23,6 +23,7 @@ import org.lucasr.layoutsamples.adapter.Tweet;
 import org.lucasr.layoutsamples.app.App;
 import org.lucasr.layoutsamples.widget.TweetElement;
 import org.lucasr.uielement.adapter.UpdateFlags;
+import org.lucasr.uielement.async.AsyncUIElement;
 
 import java.util.EnumSet;
 
@@ -41,10 +42,11 @@ public class AsyncTweetElementFactory {
         return true;
     }
 
-    public synchronized static AsyncTweetElement create(Context context, Tweet tweet) {
+    @SuppressWarnings("unchecked")
+    public synchronized static AsyncUIElement<TweetElement, Tweet> create(Context context, Tweet tweet) {
         UIElementCache elementCache = App.getInstance(context).getElementCache();
 
-        AsyncTweetElement asyncElement = (AsyncTweetElement) elementCache.get(tweet.getId());
+        AsyncUIElement<TweetElement, Tweet> asyncElement = (AsyncUIElement<TweetElement, Tweet>) elementCache.get(tweet.getId());
         if (asyncElement != null) {
             if (!asyncElement.isAttachedToHost()) {
                 final HeadlessElementHost headlessHost = SafeHeadlessElementHost.getInstance(context).getHeadlessHost();
@@ -69,7 +71,7 @@ public class AsyncTweetElementFactory {
         element.measure(widthMeasureSpec, heightMeasureSpec);
         element.layout(0, 0, element.getMeasuredWidth(), element.getMeasuredHeight());
 
-        asyncElement = new AsyncTweetElement(element);
+        asyncElement = new AsyncUIElement<TweetElement, Tweet>(element);
         elementCache.put(tweet.getId(), asyncElement);
 
         return asyncElement;

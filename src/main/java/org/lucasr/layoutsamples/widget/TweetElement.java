@@ -287,12 +287,12 @@ public class TweetElement extends UIElementGroup implements ElementPresenter<Twe
         }
     }
 
-    public void loadProfileImage(Tweet tweet, EnumSet<UpdateFlags> flags) {
+    private void loadProfileImage(Tweet tweet, EnumSet<UpdateFlags> flags) {
         ImageUtils.loadImage(getContext(), mProfileImage, mProfileImageTarget,
                 tweet.getProfileImageUrl(), flags, true);
     }
 
-    public void loadPostImage(Tweet tweet, EnumSet<UpdateFlags> flags) {
+    private void loadPostImage(Tweet tweet, EnumSet<UpdateFlags> flags) {
         ImageUtils.loadImage(getContext(), mPostImage, mPostImageTarget,
                 tweet.getPostImageUrl(), flags, false);
     }

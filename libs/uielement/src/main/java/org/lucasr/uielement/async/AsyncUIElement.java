@@ -14,40 +14,33 @@
  * limitations under the License.
  */
 
-package org.lucasr.layoutsamples.async;
+package org.lucasr.uielement.async;
 
-import android.content.res.Resources;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.os.Looper;
-import android.text.TextUtils;
 
-import org.lucasr.layoutsamples.adapter.Tweet;
-import org.lucasr.layoutsamples.app.R;
-import org.lucasr.layoutsamples.widget.TweetElement;
 import org.lucasr.uielement.adapter.ElementPresenter;
 import org.lucasr.uielement.adapter.ImagePresenter;
 import org.lucasr.uielement.adapter.UpdateFlags;
+import org.lucasr.uielement.canvas.UIElementGroup;
 import org.lucasr.uielement.canvas.UIElementWrapper;
 
 import java.util.EnumSet;
 
-public class AsyncTweetElement extends UIElementWrapper implements ElementPresenter<Tweet> {
+public class AsyncUIElement<T extends UIElementGroup, U> extends UIElementWrapper implements ElementPresenter<U> {
     private final Paint mIndicatorPaint;
-    private final int mIndicatorSize;
+    private final static int INDICATOR_SIZE = 15;
 
-    public AsyncTweetElement(TweetElement element) {
+    public AsyncUIElement(T element) {
         super(element);
 
-        final Resources res = getResources();
-
         mIndicatorPaint = new Paint();
-        mIndicatorSize = res.getDimensionPixelSize(R.dimen.tweet_padding);
 
         boolean onMainThread = (Looper.myLooper() == Looper.getMainLooper());
-        final int indicatorColor = onMainThread ? R.color.tweet_on_main_thread :
-                                                  R.color.tweet_off_main_thread;
-        mIndicatorPaint.setColor(res.getColor(indicatorColor));
+        final int indicatorColor = onMainThread ? 0xFFFF0000 : 0xFF66CD00;
+
+        mIndicatorPaint.setColor(indicatorColor);
     }
 
     @Override
@@ -63,7 +56,7 @@ public class AsyncTweetElement extends UIElementWrapper implements ElementPresen
     @Override
     public void draw(Canvas canvas) {
         super.draw(canvas);
-        canvas.drawRect(0, 0, mIndicatorSize, mIndicatorSize, mIndicatorPaint);
+        canvas.drawRect(0, 0, INDICATOR_SIZE, INDICATOR_SIZE, mIndicatorPaint);
     }
 
     @Override
@@ -73,16 +66,8 @@ public class AsyncTweetElement extends UIElementWrapper implements ElementPresen
 
     @SuppressWarnings("unchecked")
     @Override
-    public void update(Tweet tweet, EnumSet<UpdateFlags> flags) {
-        ImagePresenter<Tweet> presenter = (ImagePresenter<Tweet>) getWrappedElement();
-        presenter.load(tweet, flags);
-
-        /*TweetElement element = (TweetElement) getWrappedElement();
-        element.loadProfileImage(tweet, flags);
-
-        final boolean hasPostImage = !TextUtils.isEmpty(tweet.getPostImageUrl());
-        if (hasPostImage) {
-            element.loadPostImage(tweet, flags);
-        }*/
+    public void update(U u, EnumSet<UpdateFlags> flags) {
+        ImagePresenter<U> presenter = (ImagePresenter<U>) getWrappedElement();
+        presenter.load(u, flags);
     }
 }
