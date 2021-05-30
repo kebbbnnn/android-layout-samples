@@ -23,7 +23,7 @@ import android.graphics.drawable.Drawable;
 import org.lucasr.uielement.canvas.UIElementHost;
 
 public class HeadlessElementHost implements UIElementHost {
-    private final Context mContext;
+    protected Context mContext;
 
     public HeadlessElementHost(Context context) {
         mContext = context;

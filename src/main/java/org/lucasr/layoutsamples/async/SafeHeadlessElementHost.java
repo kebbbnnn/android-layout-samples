@@ -14,8 +14,10 @@ public class SafeHeadlessElementHost {
 
     public static SafeHeadlessElementHost getInstance(Context context) {
         SafeHeadlessElementHost instance = SingletonHelper.INSTANCE;
-        if (instance.mHeadlessHost == null || instance.mHeadlessHost.get() == null) {
+        if (null == instance.mHeadlessHost || null == instance.mHeadlessHost.get()) {
             instance.mHeadlessHost = new WeakReference<>(new HeadlessElementHost(context));
+        } else if (null == instance.mHeadlessHost.get().getContext()) {
+            instance.mHeadlessHost.get().mContext = context;
         }
         return instance;
     }
