@@ -27,6 +27,7 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 import org.lucasr.layoutsamples.app.R;
 import org.lucasr.layoutsamples.util.RawResource;
+import org.lucasr.uielement.adapter.ElementPresenter;
 
 import java.util.ArrayList;
 import java.util.EnumSet;
@@ -87,13 +88,14 @@ public class TweetsAdapter extends BaseAdapter {
         return sEntries != null ? sEntries.get(position) : null;
     }
 
+    @SuppressWarnings("unchecked")
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        final ElementPresenter presenter;
+        final ElementPresenter<Tweet> presenter;
         if (convertView == null) {
-            presenter = (ElementPresenter) LayoutInflater.from(mContext).inflate(mPresenterId, parent, false);
+            presenter = (ElementPresenter<Tweet>) LayoutInflater.from(mContext).inflate(mPresenterId, parent, false);
         } else {
-            presenter = (ElementPresenter) convertView;
+            presenter = (ElementPresenter<Tweet>) convertView;
         }
 
         Tweet tweet = (Tweet) getItem(position);

@@ -20,7 +20,7 @@ import android.content.Context;
 import android.view.View;
 
 import org.lucasr.layoutsamples.adapter.Tweet;
-import org.lucasr.layoutsamples.adapter.ElementPresenter;
+import org.lucasr.uielement.adapter.ElementPresenter;
 import org.lucasr.layoutsamples.app.App;
 import org.lucasr.layoutsamples.widget.TweetElement;
 

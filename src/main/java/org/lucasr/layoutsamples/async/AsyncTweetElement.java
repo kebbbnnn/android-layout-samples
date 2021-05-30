@@ -25,7 +25,7 @@ import android.text.TextUtils;
 import org.lucasr.layoutsamples.adapter.Tweet;
 import org.lucasr.layoutsamples.app.R;
 import org.lucasr.layoutsamples.widget.TweetElement;
-import org.lucasr.layoutsamples.adapter.ElementPresenter;
+import org.lucasr.uielement.adapter.ElementPresenter;
 import org.lucasr.uielement.canvas.UIElementWrapper;
 
 import java.util.EnumSet;

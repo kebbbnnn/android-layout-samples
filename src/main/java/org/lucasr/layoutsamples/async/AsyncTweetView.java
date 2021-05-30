@@ -20,7 +20,7 @@ import android.content.Context;
 import android.util.AttributeSet;
 
 import org.lucasr.layoutsamples.adapter.Tweet;
-import org.lucasr.layoutsamples.adapter.ElementPresenter;
+import org.lucasr.uielement.adapter.ElementPresenter;
 import org.lucasr.uielement.canvas.UIElementView;
 
 import java.util.EnumSet;
