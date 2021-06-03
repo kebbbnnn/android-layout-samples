@@ -18,14 +18,19 @@ package org.lucasr.layoutsamples.app;
 
 import android.content.Context;
 import android.util.AttributeSet;
-import android.util.Log;
 import android.view.ViewTreeObserver.OnGlobalLayoutListener;
 
-import org.lucasr.layoutsamples.async.TweetsLayoutLoader;
+import org.lucasr.layoutsamples.adapter.Tweet;
+import org.lucasr.uielement.async.AsyncLayoutLoader;
 import org.lucasr.layoutsamples.adapter.TweetsAdapter;
-import org.lucasr.layoutsamples.async.AsyncTweetElementFactory;
+import org.lucasr.layoutsamples.async.AsyncTweetElementProvider;
+import org.lucasr.layoutsamples.widget.TweetElement;
 import org.lucasr.smoothie.AsyncListView;
 import org.lucasr.smoothie.ItemManager;
+import org.lucasr.uielement.async.AsyncUIElement;
+import org.lucasr.uielement.async.AsyncUIElementProvider;
+import org.lucasr.uielement.cache.UIElementCache;
+import org.lucasr.uielement.canvas.UIElement;
 
 public class TweetsListView extends AsyncListView {
     private static final int CPU_COUNT = Runtime.getRuntime().availableProcessors();
@@ -51,7 +56,7 @@ public class TweetsListView extends AsyncListView {
         final Context context = getContext();
 
         final int targetWidth = getWidth() - getPaddingLeft() + getPaddingRight();
-        if (AsyncTweetElementFactory.setTargetWidth(context, targetWidth)) {
+        if (AsyncTweetElementProvider.shared.setTargetWidth(context, targetWidth)) {
             App.getInstance(context).getElementCache().evictAll();
 
             TweetsAdapter adapter = (TweetsAdapter) getAdapter();
@@ -65,7 +70,10 @@ public class TweetsListView extends AsyncListView {
         Context context = getContext();
 
         if (mPresenterId == R.layout.tweet_async_row && !hasItemManager()) {
-            TweetsLayoutLoader loader = new TweetsLayoutLoader(context);
+            final UIElementCache elementCache = App.getInstance(context).getElementCache();
+            final AsyncUIElementProvider<Tweet> elementProvider = AsyncTweetElementProvider.shared;
+
+            AsyncLayoutLoader<Tweet, UIElement> loader = new AsyncLayoutLoader<>(context, elementCache, elementProvider);
 
             ItemManager.Builder builder = new ItemManager.Builder(loader);
             builder.setPreloadItemsEnabled(true).setPreloadItemsCount(30);

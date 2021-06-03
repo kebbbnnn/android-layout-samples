@@ -71,7 +71,7 @@ public class TweetElement extends UIElementGroup implements ElementPresenter<Twe
         int padding = (int) TweetElementLayout.shared.get(TweetElementLayout.TweetElementResources.PADDING);
         setPadding(padding, padding, padding, padding);
 
-        long startTime = System.nanoTime();
+//        long startTime = System.nanoTime();
 //        UIElementInflater.from(getContext()).inflate(R.layout.tweet_element_view, host, this);
 
         //mProfileImage = (ImageElement) findElementById(R.id.profile_image);
@@ -144,9 +144,9 @@ public class TweetElement extends UIElementGroup implements ElementPresenter<Twe
 
             mActionIcons.put(action, actionElement);
         }
-        long endTime = System.nanoTime();
-        double duration = ((double) (endTime - startTime)) / 1000000;
-        Log.e(TweetElement.class.getName(), "Finished at " + duration + "ms");
+        //long endTime = System.nanoTime();
+        //double duration = ((double) (endTime - startTime)) / 1000000;
+        //Log.e(TweetElement.class.getName(), "Finished at " + duration + "ms");
     }
 
     private void layoutElement(UIElement element, int left, int top, int width, int height) {

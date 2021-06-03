@@ -24,16 +24,24 @@ import org.lucasr.layoutsamples.app.App;
 import org.lucasr.layoutsamples.widget.TweetElement;
 import org.lucasr.uielement.adapter.UpdateFlags;
 import org.lucasr.uielement.async.AsyncUIElement;
+import org.lucasr.uielement.async.AsyncUIElementProvider;
+import org.lucasr.uielement.cache.UIElementCache;
 
 import java.util.EnumSet;
 
-public class AsyncTweetElementFactory {
-    private AsyncTweetElementFactory() {}
+public class AsyncTweetElementProvider implements AsyncUIElementProvider<Tweet> {
+
+    private AsyncTweetElementProvider() {}
+
+    private static class SingletonHelper {
+        private static final AsyncTweetElementProvider INSTANCE = new AsyncTweetElementProvider();
+    }
+
+    public static final AsyncTweetElementProvider shared = SingletonHelper.INSTANCE;
 
     private static int sTargetWidth;
-    //private static HeadlessElementHost sHeadlessHost;
 
-    public synchronized static boolean setTargetWidth(Context context, int targetWidth) {
+    public synchronized boolean setTargetWidth(Context context, int targetWidth) {
         if (sTargetWidth == targetWidth) {
             return false;
         }
@@ -43,10 +51,11 @@ public class AsyncTweetElementFactory {
     }
 
     @SuppressWarnings("unchecked")
-    public synchronized static AsyncUIElement<TweetElement, Tweet> create(Context context, Tweet tweet) {
+    @Override
+    public synchronized AsyncUIElement<TweetElement, Tweet> create(Context context, Tweet tweet) {
         UIElementCache elementCache = App.getInstance(context).getElementCache();
 
-        AsyncUIElement<TweetElement, Tweet> asyncElement = (AsyncUIElement<TweetElement, Tweet>) elementCache.get(tweet.getId());
+        AsyncUIElement<TweetElement, Tweet> asyncElement = (AsyncUIElement<TweetElement, Tweet>) elementCache.get(tweet);
         if (asyncElement != null) {
             if (!asyncElement.isAttachedToHost()) {
                 final HeadlessElementHost headlessHost = SafeHeadlessElementHost.getInstance(context).getHeadlessHost();
@@ -60,10 +69,6 @@ public class AsyncTweetElementFactory {
         final int heightMeasureSpec = View.MeasureSpec.makeMeasureSpec(0,
                 View.MeasureSpec.UNSPECIFIED);
 
-        /*if (sHeadlessHost == null) {
-            sHeadlessHost = new HeadlessElementHost(context);
-        }*/
-
         HeadlessElementHost headlessHost = SafeHeadlessElementHost.getInstance(context).getHeadlessHost();
 
         final TweetElement element = new TweetElement(headlessHost);
@@ -72,7 +77,7 @@ public class AsyncTweetElementFactory {
         element.layout(0, 0, element.getMeasuredWidth(), element.getMeasuredHeight());
 
         asyncElement = new AsyncUIElement<TweetElement, Tweet>(element);
-        elementCache.put(tweet.getId(), asyncElement);
+        elementCache.put(tweet, asyncElement);
 
         return asyncElement;
     }

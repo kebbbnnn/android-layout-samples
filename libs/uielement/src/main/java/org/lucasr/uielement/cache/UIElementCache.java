@@ -14,13 +14,13 @@
  * limitations under the License.
  */
 
-package org.lucasr.layoutsamples.async;
+package org.lucasr.uielement.cache;
 
 import android.util.LruCache;
 
 import org.lucasr.uielement.canvas.UIElement;
 
-public class UIElementCache extends LruCache<Long, UIElement> {
+public class UIElementCache extends LruCache<Hashable, UIElement> {
     private static final int MAX_CACHED_ELEMENTS = 30;
 
     public UIElementCache() {

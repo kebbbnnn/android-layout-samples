@@ -18,19 +18,9 @@ package org.lucasr.layoutsamples.app;
 
 import android.app.Application;
 import android.content.Context;
-import android.util.AttributeSet;
 
-import org.lucasr.layoutsamples.async.UIElementCache;
-import org.lucasr.layoutsamples.canvas.TappableImageElement;
-import org.lucasr.layoutsamples.util.Shared;
-import org.lucasr.layoutsamples.widget.TweetElement;
+import org.lucasr.uielement.cache.UIElementCache;
 import org.lucasr.layoutsamples.widget.TweetElementLayout;
-import org.lucasr.uielement.canvas.UIElement;
-import org.lucasr.uielement.canvas.UIElementHost;
-import org.lucasr.uielement.canvas.UIElementInflater;
-
-import java.lang.reflect.Constructor;
-import java.util.HashMap;
 
 public class App extends Application {
     private UIElementCache mElementCache;

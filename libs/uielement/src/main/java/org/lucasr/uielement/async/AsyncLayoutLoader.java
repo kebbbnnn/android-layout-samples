@@ -14,43 +14,48 @@
  * limitations under the License.
  */
 
-package org.lucasr.layoutsamples.async;
+package org.lucasr.uielement.async;
 
 import android.content.Context;
 import android.view.View;
 import android.widget.Adapter;
 
-import org.lucasr.layoutsamples.adapter.Tweet;
-import org.lucasr.layoutsamples.app.App;
-import org.lucasr.uielement.canvas.UIElement;
 import org.lucasr.smoothie.SimpleItemLoader;
+import org.lucasr.uielement.cache.Hashable;
+import org.lucasr.uielement.cache.UIElementCache;
+import org.lucasr.uielement.canvas.UIElement;
 
-public class TweetsLayoutLoader extends SimpleItemLoader<Tweet, UIElement> {
+public class AsyncLayoutLoader<O extends Hashable, E extends UIElement> extends SimpleItemLoader<O, E> {
     private final Context mContext;
     private final UIElementCache mElementCache;
+    private final AsyncUIElementProvider<O> mElementCreator;
 
-    public TweetsLayoutLoader(Context context) {
+    public AsyncLayoutLoader(Context context, UIElementCache elementCache, AsyncUIElementProvider<O> elementCreator) {
         mContext = context;
-        mElementCache = App.getInstance(context).getElementCache();
+        mElementCache = elementCache;
+        mElementCreator = elementCreator;
+    }
+
+    @SuppressWarnings("unchecked")
+    @Override
+    public O getItemParams(Adapter adapter, int position) {
+        return (O) adapter.getItem(position);
+    }
+
+    @SuppressWarnings("unchecked")
+    @Override
+    public E loadItem(O object) {
+        return (E) mElementCreator.create(mContext, object);
+    }
+
+    @SuppressWarnings("unchecked")
+    @Override
+    public E loadItemFromMemory(O object) {
+        return (E) mElementCache.get(object);
     }
 
     @Override
-    public Tweet getItemParams(Adapter adapter, int position) {
-        return (Tweet) adapter.getItem(position);
-    }
-
-    @Override
-    public UIElement loadItem(Tweet tweet) {
-        return AsyncTweetElementFactory.create(mContext, tweet);
-    }
-
-    @Override
-    public UIElement loadItemFromMemory(Tweet tweet) {
-        return mElementCache.get(tweet.getId());
-    }
-
-    @Override
-    public void displayItem(View itemView, UIElement result, boolean fromMemory) {
+    public void displayItem(View itemView, E result, boolean fromMemory) {
         // Do nothing as we're only using this loader to pre-measure/layout
         // TweetElements that are off screen.
     }

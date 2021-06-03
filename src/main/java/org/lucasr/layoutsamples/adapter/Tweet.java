@@ -18,8 +18,9 @@ package org.lucasr.layoutsamples.adapter;
 
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.lucasr.uielement.cache.Hashable;
 
-public class Tweet {
+public class Tweet implements Hashable {
     private static final String JSON_ID = "id";
     private static final String JSON_AUTHOR_NAME = "authorName";
     private static final String JSON_MESSAGE = "message";
@@ -77,5 +78,10 @@ public class Tweet {
     @Override
     public String toString() {
         return "Tweet@" + mId;
+    }
+
+    @Override
+    public int hashCode() {
+        return (int) getId();
     }
 }

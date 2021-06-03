@@ -23,16 +23,17 @@ import android.os.Looper;
 import org.lucasr.uielement.adapter.ElementPresenter;
 import org.lucasr.uielement.adapter.ImagePresenter;
 import org.lucasr.uielement.adapter.UpdateFlags;
+import org.lucasr.uielement.cache.Hashable;
 import org.lucasr.uielement.canvas.UIElementGroup;
 import org.lucasr.uielement.canvas.UIElementWrapper;
 
 import java.util.EnumSet;
 
-public class AsyncUIElement<T extends UIElementGroup, U> extends UIElementWrapper implements ElementPresenter<U> {
+public class AsyncUIElement<E extends UIElementGroup, O extends Hashable> extends UIElementWrapper implements ElementPresenter<O> {
     private final Paint mIndicatorPaint;
     private final static int INDICATOR_SIZE = 15;
 
-    public AsyncUIElement(T element) {
+    public AsyncUIElement(E element) {
         super(element);
 
         mIndicatorPaint = new Paint();
@@ -66,8 +67,8 @@ public class AsyncUIElement<T extends UIElementGroup, U> extends UIElementWrappe
 
     @SuppressWarnings("unchecked")
     @Override
-    public void update(U u, EnumSet<UpdateFlags> flags) {
-        ImagePresenter<U> presenter = (ImagePresenter<U>) getWrappedElement();
-        presenter.load(u, flags);
+    public void update(O object, EnumSet<UpdateFlags> flags) {
+        ImagePresenter<O> presenter = (ImagePresenter<O>) getWrappedElement();
+        presenter.load(object, flags);
     }
 }
