@@ -39,15 +39,14 @@ public class AsyncTweetElementProvider implements AsyncUIElementProvider<Tweet> 
 
     public static final AsyncTweetElementProvider shared = SingletonHelper.INSTANCE;
 
-    private static int sTargetWidth;
+    private int mTargetWidth;
 
     public synchronized boolean setTargetWidth(Context context, int targetWidth) {
-        if (sTargetWidth == targetWidth) {
-            return false;
+        final boolean notEqual = mTargetWidth != targetWidth;
+        if (notEqual) {
+            mTargetWidth = targetWidth;
         }
-
-        sTargetWidth = targetWidth;
-        return true;
+        return notEqual;
     }
 
     @SuppressWarnings("unchecked")
@@ -64,7 +63,7 @@ public class AsyncTweetElementProvider implements AsyncUIElementProvider<Tweet> 
             return asyncElement;
         }
 
-        final int widthMeasureSpec = View.MeasureSpec.makeMeasureSpec(sTargetWidth,
+        final int widthMeasureSpec = View.MeasureSpec.makeMeasureSpec(mTargetWidth,
                 View.MeasureSpec.EXACTLY);
         final int heightMeasureSpec = View.MeasureSpec.makeMeasureSpec(0,
                 View.MeasureSpec.UNSPECIFIED);

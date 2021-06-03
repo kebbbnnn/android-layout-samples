@@ -21,13 +21,11 @@ import android.util.AttributeSet;
 import android.view.ViewTreeObserver.OnGlobalLayoutListener;
 
 import org.lucasr.layoutsamples.adapter.Tweet;
-import org.lucasr.uielement.async.AsyncLayoutLoader;
 import org.lucasr.layoutsamples.adapter.TweetsAdapter;
 import org.lucasr.layoutsamples.async.AsyncTweetElementProvider;
-import org.lucasr.layoutsamples.widget.TweetElement;
 import org.lucasr.smoothie.AsyncListView;
 import org.lucasr.smoothie.ItemManager;
-import org.lucasr.uielement.async.AsyncUIElement;
+import org.lucasr.uielement.async.AsyncLayoutLoader;
 import org.lucasr.uielement.async.AsyncUIElementProvider;
 import org.lucasr.uielement.cache.UIElementCache;
 import org.lucasr.uielement.canvas.UIElement;
