@@ -54,7 +54,7 @@ public class TweetsListView extends AsyncListView {
         final Context context = getContext();
 
         final int targetWidth = getWidth() - getPaddingLeft() + getPaddingRight();
-        if (AsyncTweetElementProvider.shared.setTargetWidth(context, targetWidth)) {
+        if (AsyncTweetElementProvider.SHARED.setTargetWidth(context, targetWidth)) {
             App.getInstance(context).getElementCache().evictAll();
 
             TweetsAdapter adapter = (TweetsAdapter) getAdapter();
@@ -69,7 +69,7 @@ public class TweetsListView extends AsyncListView {
 
         if (mPresenterId == R.layout.tweet_async_row && !hasItemManager()) {
             final UIElementCache elementCache = App.getInstance(context).getElementCache();
-            final AsyncUIElementProvider<Tweet> elementProvider = AsyncTweetElementProvider.shared;
+            final AsyncUIElementProvider<Tweet> elementProvider = AsyncTweetElementProvider.SHARED;
 
             AsyncLayoutLoader<Tweet, UIElement> loader = new AsyncLayoutLoader<>(context, elementCache, elementProvider);
 
@@ -91,7 +91,8 @@ public class TweetsListView extends AsyncListView {
                 updateTargetWidth();
                 updateItemLoader();
 
-                mTweetsAdapter = new TweetsAdapter(getContext(), mPresenterId);
+                final AsyncTweetElementProvider provider = AsyncTweetElementProvider.SHARED;
+                mTweetsAdapter = new TweetsAdapter(provider, getContext(), mPresenterId);
                 setAdapter(mTweetsAdapter);
 
                 getViewTreeObserver().removeGlobalOnLayoutListener(this);

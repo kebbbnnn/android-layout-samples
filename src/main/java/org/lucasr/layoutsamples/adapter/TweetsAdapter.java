@@ -27,8 +27,9 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 import org.lucasr.layoutsamples.app.R;
 import org.lucasr.layoutsamples.util.RawResource;
-import org.lucasr.uielement.adapter.ElementPresenter;
 import org.lucasr.uielement.adapter.UpdateFlags;
+import org.lucasr.uielement.adapter.ViewPresenter;
+import org.lucasr.uielement.async.AsyncUIElementProvider;
 
 import java.util.ArrayList;
 import java.util.EnumSet;
@@ -37,12 +38,14 @@ import java.util.List;
 public class TweetsAdapter extends BaseAdapter {
     private static final boolean DELAY_LOADING = false; //Test on loading delay
 
+    private final AsyncUIElementProvider<Tweet> mProvider;
     private final Context mContext;
     private int mPresenterId;
 
     private static List<Tweet> sEntries;
 
-    public TweetsAdapter(Context context, int presenterId) {
+    public TweetsAdapter(AsyncUIElementProvider<Tweet> provider, Context context, int presenterId) {
+        mProvider = provider;
         mContext = context;
         mPresenterId = presenterId;
 
@@ -92,11 +95,15 @@ public class TweetsAdapter extends BaseAdapter {
     @SuppressWarnings("unchecked")
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        final ElementPresenter<Tweet> presenter;
+        final ViewPresenter<Tweet> presenter;
         if (convertView == null) {
-            presenter = (ElementPresenter<Tweet>) LayoutInflater.from(mContext).inflate(mPresenterId, parent, false);
+            presenter = (ViewPresenter<Tweet>) LayoutInflater.from(mContext).inflate(mPresenterId, parent, false);
         } else {
-            presenter = (ElementPresenter<Tweet>) convertView;
+            presenter = (ViewPresenter<Tweet>) convertView;
+        }
+
+        if (mPresenterId == R.layout.tweet_async_row && !presenter.hasAsyncUIElementProvider()) {
+            presenter.setAsyncUIElementProvider(mProvider);
         }
 
         Tweet tweet = (Tweet) getItem(position);

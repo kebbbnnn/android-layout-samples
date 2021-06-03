@@ -37,7 +37,7 @@ public class AsyncTweetElementProvider implements AsyncUIElementProvider<Tweet> 
         private static final AsyncTweetElementProvider INSTANCE = new AsyncTweetElementProvider();
     }
 
-    public static final AsyncTweetElementProvider shared = SingletonHelper.INSTANCE;
+    public static final AsyncTweetElementProvider SHARED = SingletonHelper.INSTANCE;
 
     private int mTargetWidth;
 

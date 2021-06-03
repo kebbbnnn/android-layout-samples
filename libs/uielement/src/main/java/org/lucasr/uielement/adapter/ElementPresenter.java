@@ -16,8 +16,10 @@
 
 package org.lucasr.uielement.adapter;
 
+import org.lucasr.uielement.cache.Hashable;
+
 import java.util.EnumSet;
 
-public interface ElementPresenter<T> {
-    public void update(T t, EnumSet<UpdateFlags> flags);
+public interface ElementPresenter<O extends Hashable> {
+    public void update(O object, EnumSet<UpdateFlags> flags);
 }

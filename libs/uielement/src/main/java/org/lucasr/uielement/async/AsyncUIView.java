@@ -14,43 +14,46 @@
  * limitations under the License.
  */
 
-package org.lucasr.layoutsamples.widget;
+package org.lucasr.uielement.async;
 
 import android.content.Context;
 import android.util.AttributeSet;
 
-import org.lucasr.layoutsamples.adapter.Tweet;
-import org.lucasr.uielement.adapter.ElementPresenter;
 import org.lucasr.uielement.adapter.UpdateFlags;
 import org.lucasr.uielement.adapter.ViewPresenter;
-import org.lucasr.uielement.async.AsyncUIElementProvider;
+import org.lucasr.uielement.cache.Hashable;
+import org.lucasr.uielement.canvas.UIElementGroup;
 import org.lucasr.uielement.canvas.UIElementView;
 
 import java.util.EnumSet;
 
-public class TweetElementView extends UIElementView implements ViewPresenter<Tweet> {
-    public TweetElementView(Context context, AttributeSet attrs) {
+public class AsyncUIView<O extends Hashable> extends UIElementView implements ViewPresenter<O> {
+    private AsyncUIElementProvider<O> mProvider;
+
+    public AsyncUIView(Context context, AttributeSet attrs) {
         this(context, attrs, 0);
     }
 
-    public TweetElementView(Context context, AttributeSet attrs, int defStyleAttr) {
+    public AsyncUIView(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
-        setUIElement(new TweetElement(this));
-    }
-
-    @Override
-    public void update(Tweet tweet, EnumSet<UpdateFlags> flags) {
-        TweetElement element = (TweetElement) getUIElement();
-        element.update(tweet, flags);
     }
 
     @Override
     public boolean hasAsyncUIElementProvider() {
-        return false;
+        return null != mProvider;
     }
 
     @Override
-    public void setAsyncUIElementProvider(AsyncUIElementProvider<Tweet> provider) {
-        // We don't need async ui element provider here
+    public void setAsyncUIElementProvider(AsyncUIElementProvider<O> provider) {
+        mProvider = provider;
+    }
+
+    @SuppressWarnings("unchecked")
+    @Override
+    public void update(O object, EnumSet<UpdateFlags> flags) {
+        final AsyncUIElement<? extends UIElementGroup, O> element = (AsyncUIElement<? extends UIElementGroup, O>) mProvider.create(getContext(), object);
+        setUIElement(element);
+
+        element.update(object, flags);
     }
 }

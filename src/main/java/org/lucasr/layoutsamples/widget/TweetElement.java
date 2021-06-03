@@ -155,7 +155,7 @@ public class TweetElement extends UIElementGroup implements ElementPresenter<Twe
         final int topWithMargins = top + margins.topMargin;
 
         element.layout(leftWithMargins, topWithMargins,
-                       leftWithMargins + width, topWithMargins + height);
+                leftWithMargins + width, topWithMargins + height);
     }
 
     private int getWidthWithMargins(UIElement element) {
@@ -205,24 +205,24 @@ public class TweetElement extends UIElementGroup implements ElementPresenter<Twe
         int heightUsed = 0;
 
         measureElementWithMargins(mProfileImage,
-                                  widthMeasureSpec, widthUsed,
-                                  heightMeasureSpec, heightUsed);
+                widthMeasureSpec, widthUsed,
+                heightMeasureSpec, heightUsed);
         widthUsed += getMeasuredWidthWithMargins(mProfileImage);
 
         measureElementWithMargins(mAuthorText,
-                                  widthMeasureSpec, widthUsed,
-                                  heightMeasureSpec, heightUsed);
+                widthMeasureSpec, widthUsed,
+                heightMeasureSpec, heightUsed);
         heightUsed += getMeasuredHeightWithMargins(mAuthorText);
 
         measureElementWithMargins(mMessageText,
-                                  widthMeasureSpec, widthUsed,
-                                  heightMeasureSpec, heightUsed);
+                widthMeasureSpec, widthUsed,
+                heightMeasureSpec, heightUsed);
         heightUsed += getMeasuredHeightWithMargins(mMessageText);
 
         if (mPostImage.getVisibility() != View.GONE) {
             measureElementWithMargins(mPostImage,
-                                      widthMeasureSpec, widthUsed,
-                                      heightMeasureSpec, heightUsed);
+                    widthMeasureSpec, widthUsed,
+                    heightMeasureSpec, heightUsed);
             heightUsed += getMeasuredHeightWithMargins(mPostImage);
         }
 
@@ -230,8 +230,8 @@ public class TweetElement extends UIElementGroup implements ElementPresenter<Twe
         for (Action action : Action.values()) {
             final UIElement icon = mActionIcons.get(action);
             measureElementWithMargins(icon,
-                                      widthMeasureSpec, widthUsed,
-                                      heightMeasureSpec, heightUsed);
+                    widthMeasureSpec, widthUsed,
+                    heightMeasureSpec, heightUsed);
 
             final int height = getMeasuredHeightWithMargins(icon);
             if (height > maxIconHeight) {
@@ -254,18 +254,18 @@ public class TweetElement extends UIElementGroup implements ElementPresenter<Twe
         int currentTop = paddingTop;
 
         layoutElement(mProfileImage, paddingLeft, currentTop,
-                      mProfileImage.getMeasuredWidth(),
-                      mProfileImage.getMeasuredHeight());
+                mProfileImage.getMeasuredWidth(),
+                mProfileImage.getMeasuredHeight());
 
         final int contentLeft = getWidthWithMargins(mProfileImage) + paddingLeft;
         final int contentWidth = r - l - contentLeft - getPaddingRight();
 
         layoutElement(mAuthorText, contentLeft, currentTop,
-                      contentWidth, mAuthorText.getMeasuredHeight());
+                contentWidth, mAuthorText.getMeasuredHeight());
         currentTop += getHeightWithMargins(mAuthorText);
 
         layoutElement(mMessageText, contentLeft, currentTop,
-                      contentWidth, mMessageText.getMeasuredHeight());
+                contentWidth, mMessageText.getMeasuredHeight());
         currentTop += getHeightWithMargins(mMessageText);
 
         if (mPostImage.getVisibility() != View.GONE) {
@@ -282,7 +282,7 @@ public class TweetElement extends UIElementGroup implements ElementPresenter<Twe
             final UIElement icon = mActionIcons.get(action);
 
             layoutElement(icon, iconsLeft, currentTop,
-                          iconsWidth, icon.getMeasuredHeight());
+                    iconsWidth, icon.getMeasuredHeight());
             iconsLeft += iconsWidth;
         }
     }
