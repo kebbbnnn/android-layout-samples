@@ -68,6 +68,7 @@ public class AsyncUIElement<E extends UIElementGroup, O extends Hashable> extend
     @SuppressWarnings("unchecked")
     @Override
     public void update(O object, EnumSet<UpdateFlags> flags) {
+        // Run on the main thread. This is where we load images.
         ImagePresenter<O> presenter = (ImagePresenter<O>) getWrappedElement();
         presenter.load(object, flags);
     }
