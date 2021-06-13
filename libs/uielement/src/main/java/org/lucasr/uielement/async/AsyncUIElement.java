@@ -20,7 +20,7 @@ import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.os.Looper;
 
-import org.lucasr.uielement.adapter.ElementPresenter;
+import org.lucasr.uielement.adapter.UIElementPresenter;
 import org.lucasr.uielement.adapter.ImagePresenter;
 import org.lucasr.uielement.adapter.UpdateFlags;
 import org.lucasr.uielement.cache.Hashable;
@@ -29,7 +29,7 @@ import org.lucasr.uielement.canvas.UIElementWrapper;
 
 import java.util.EnumSet;
 
-public class AsyncUIElement<E extends UIElementGroup, O extends Hashable> extends UIElementWrapper implements ElementPresenter<O> {
+public class AsyncUIElement<E extends UIElementGroup, O extends Hashable> extends UIElementWrapper implements UIElementPresenter<O> {
     private final Paint mIndicatorPaint;
     private final static int INDICATOR_SIZE = 15;
 

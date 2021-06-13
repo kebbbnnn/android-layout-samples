@@ -20,15 +20,14 @@ import android.content.Context;
 import android.util.AttributeSet;
 
 import org.lucasr.layoutsamples.adapter.Tweet;
-import org.lucasr.uielement.adapter.ElementPresenter;
 import org.lucasr.uielement.adapter.UpdateFlags;
-import org.lucasr.uielement.adapter.ViewPresenter;
+import org.lucasr.uielement.adapter.UIElementViewPresenter;
 import org.lucasr.uielement.async.AsyncUIElementProvider;
 import org.lucasr.uielement.canvas.UIElementView;
 
 import java.util.EnumSet;
 
-public class TweetElementView extends UIElementView implements ViewPresenter<Tweet> {
+public class TweetElementView extends UIElementView implements UIElementViewPresenter<Tweet> {
     public TweetElementView(Context context, AttributeSet attrs) {
         this(context, attrs, 0);
     }

@@ -29,15 +29,14 @@ import org.lucasr.layoutsamples.adapter.Action;
 import org.lucasr.layoutsamples.adapter.Tweet;
 import org.lucasr.layoutsamples.app.R;
 import org.lucasr.layoutsamples.util.ImageUtils;
-import org.lucasr.uielement.adapter.ElementPresenter;
 import org.lucasr.uielement.adapter.UpdateFlags;
-import org.lucasr.uielement.adapter.ViewPresenter;
+import org.lucasr.uielement.adapter.UIElementViewPresenter;
 import org.lucasr.uielement.async.AsyncUIElementProvider;
 
 import java.util.EnumMap;
 import java.util.EnumSet;
 
-public class TweetCompositeView extends RelativeLayout implements ViewPresenter<Tweet> {
+public class TweetCompositeView extends RelativeLayout implements UIElementViewPresenter<Tweet> {
     private final ImageView mProfileImage;
     private final TextView mAuthorText;
     private final TextView mMessageText;

@@ -36,7 +36,7 @@ import org.lucasr.layoutsamples.adapter.Action;
 import org.lucasr.layoutsamples.adapter.Tweet;
 import org.lucasr.layoutsamples.canvas.TappableImageElement;
 import org.lucasr.layoutsamples.util.ImageUtils;
-import org.lucasr.uielement.adapter.ElementPresenter;
+import org.lucasr.uielement.adapter.UIElementPresenter;
 import org.lucasr.uielement.adapter.ImagePresenter;
 import org.lucasr.uielement.adapter.UpdateFlags;
 import org.lucasr.uielement.canvas.ImageElement;
@@ -48,7 +48,7 @@ import org.lucasr.uielement.canvas.UIElementHost;
 import java.util.EnumMap;
 import java.util.EnumSet;
 
-public class TweetElement extends UIElementGroup implements ElementPresenter<Tweet>, ImagePresenter<Tweet> {
+public class TweetElement extends UIElementGroup implements UIElementPresenter<Tweet>, ImagePresenter<Tweet> {
     private final ImageElement mProfileImage;
     private final TextElement mAuthorText;
     private final TextElement mMessageText;

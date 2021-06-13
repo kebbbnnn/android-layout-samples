@@ -36,8 +36,7 @@ public class TweetsFragment extends Fragment {
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         return inflater.inflate(R.layout.fragment_tweets, container, false);
     }
 
@@ -45,8 +44,19 @@ public class TweetsFragment extends Fragment {
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        TweetsListView list = (TweetsListView) getView().findViewById(R.id.list);
+        TweetsListView list = (TweetsListView) view.findViewById(R.id.list);
         int presenterId = getArguments().getInt(ARG_PRESENTER_ID);
         list.setPresenter(presenterId);
+
+        /*if (presenterId == R.layout.tweet_async_row) {
+            final Handler handler = new Handler(Looper.getMainLooper());
+            handler.postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    String str = App.getViewHierarchy(getActivity().getWindow().getDecorView().getRootView());
+                    Log.e(this.getClass().getName(), "\n" + str);
+                }
+            }, 100);
+        }*/
     }
 }

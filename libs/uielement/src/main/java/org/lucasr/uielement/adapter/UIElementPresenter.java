@@ -20,6 +20,6 @@ import org.lucasr.uielement.cache.Hashable;
 
 import java.util.EnumSet;
 
-public interface ElementPresenter<O extends Hashable> {
+public interface UIElementPresenter<O extends Hashable> {
     public void update(O object, EnumSet<UpdateFlags> flags);
 }

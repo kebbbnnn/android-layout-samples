@@ -28,7 +28,7 @@ import org.json.JSONObject;
 import org.lucasr.layoutsamples.app.R;
 import org.lucasr.layoutsamples.util.RawResource;
 import org.lucasr.uielement.adapter.UpdateFlags;
-import org.lucasr.uielement.adapter.ViewPresenter;
+import org.lucasr.uielement.adapter.UIElementViewPresenter;
 import org.lucasr.uielement.async.AsyncUIElementProvider;
 
 import java.util.ArrayList;
@@ -95,11 +95,11 @@ public class TweetsAdapter extends BaseAdapter {
     @SuppressWarnings("unchecked")
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        final ViewPresenter<Tweet> presenter;
+        final UIElementViewPresenter<Tweet> presenter;
         if (convertView == null) {
-            presenter = (ViewPresenter<Tweet>) LayoutInflater.from(mContext).inflate(mPresenterId, parent, false);
+            presenter = (UIElementViewPresenter<Tweet>) LayoutInflater.from(mContext).inflate(mPresenterId, parent, false);
         } else {
-            presenter = (ViewPresenter<Tweet>) convertView;
+            presenter = (UIElementViewPresenter<Tweet>) convertView;
         }
 
         if (mPresenterId == R.layout.tweet_async_row && !presenter.hasAsyncUIElementProvider()) {
