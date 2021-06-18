@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package org.lucasr.layoutsamples.async;
+package org.lucasr.uielement.async;
 
 import android.content.Context;
 import android.content.res.Resources;

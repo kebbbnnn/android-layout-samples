@@ -16,6 +16,7 @@
 
 package org.lucasr.uielement.canvas;
 
+import android.annotation.SuppressLint;
 import android.os.Build;
 import android.text.Layout.Alignment;
 import android.text.StaticLayout;
@@ -40,6 +41,7 @@ public class StaticLayoutWithMaxLines {
     private static Object[] sConstructorArgs;
     private static Object sTextDirection;
 
+    @SuppressLint("LongLogTag")
     public static synchronized void ensureInitialized() {
         if (sInitialized) {
             return;

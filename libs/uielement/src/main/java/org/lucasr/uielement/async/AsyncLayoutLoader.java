@@ -45,7 +45,8 @@ public class AsyncLayoutLoader<O extends Hashable, E extends UIElement> extends 
     @SuppressWarnings("unchecked")
     @Override
     public E loadItem(O object) {
-        return (E) mElementProvider.create(mContext, object);
+        final HeadlessElementHost headlessHost = SafeHeadlessElementHost.getInstance(mContext).getHeadlessHost();
+        return (E) mElementProvider.create(mContext, object, headlessHost);
     }
 
     @SuppressWarnings("unchecked")
@@ -57,6 +58,6 @@ public class AsyncLayoutLoader<O extends Hashable, E extends UIElement> extends 
     @Override
     public void displayItem(View itemView, E result, boolean fromMemory) {
         // Do nothing as we're only using this loader to pre-measure/layout
-        // TweetElements that are off screen.
+        // UIElements that are off screen.
     }
 }

@@ -26,12 +26,14 @@ import org.lucasr.uielement.adapter.UpdateFlags;
 import org.lucasr.uielement.async.AsyncUIElement;
 import org.lucasr.uielement.async.AsyncUIElementProvider;
 import org.lucasr.uielement.cache.UIElementCache;
+import org.lucasr.uielement.canvas.UIElementHost;
 
 import java.util.EnumSet;
 
 public class AsyncTweetElementProvider implements AsyncUIElementProvider<Tweet> {
 
-    private AsyncTweetElementProvider() {}
+    private AsyncTweetElementProvider() {
+    }
 
     private static class SingletonHelper {
         private static final AsyncTweetElementProvider INSTANCE = new AsyncTweetElementProvider();
@@ -51,13 +53,12 @@ public class AsyncTweetElementProvider implements AsyncUIElementProvider<Tweet> 
 
     @SuppressWarnings("unchecked")
     @Override
-    public synchronized AsyncUIElement<TweetElement, Tweet> create(Context context, Tweet tweet) {
+    public synchronized AsyncUIElement<TweetElement, Tweet> create(Context context, Tweet tweet, UIElementHost headlessHost) {
         UIElementCache elementCache = App.getInstance(context).getElementCache();
 
         AsyncUIElement<TweetElement, Tweet> asyncElement = (AsyncUIElement<TweetElement, Tweet>) elementCache.get(tweet);
         if (asyncElement != null) {
             if (!asyncElement.isAttachedToHost()) {
-                final HeadlessElementHost headlessHost = SafeHeadlessElementHost.getInstance(context).getHeadlessHost();
                 asyncElement.swapHost(headlessHost);
             }
             return asyncElement;
@@ -67,8 +68,6 @@ public class AsyncTweetElementProvider implements AsyncUIElementProvider<Tweet> 
                 View.MeasureSpec.EXACTLY);
         final int heightMeasureSpec = View.MeasureSpec.makeMeasureSpec(0,
                 View.MeasureSpec.UNSPECIFIED);
-
-        HeadlessElementHost headlessHost = SafeHeadlessElementHost.getInstance(context).getHeadlessHost();
 
         final TweetElement element = new TweetElement(headlessHost);
         element.update(tweet, EnumSet.of(UpdateFlags.NO_IMAGE_LOADING));

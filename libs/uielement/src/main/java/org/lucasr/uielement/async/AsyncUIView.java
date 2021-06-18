@@ -19,8 +19,8 @@ package org.lucasr.uielement.async;
 import android.content.Context;
 import android.util.AttributeSet;
 
-import org.lucasr.uielement.adapter.UpdateFlags;
 import org.lucasr.uielement.adapter.UIElementViewPresenter;
+import org.lucasr.uielement.adapter.UpdateFlags;
 import org.lucasr.uielement.cache.Hashable;
 import org.lucasr.uielement.canvas.UIElementGroup;
 import org.lucasr.uielement.canvas.UIElementView;
@@ -51,7 +51,8 @@ public class AsyncUIView<O extends Hashable> extends UIElementView implements UI
     @SuppressWarnings("unchecked")
     @Override
     public void update(O object, EnumSet<UpdateFlags> flags) {
-        final AsyncUIElement<? extends UIElementGroup, O> element = (AsyncUIElement<? extends UIElementGroup, O>) mProvider.create(getContext(), object);
+        final HeadlessElementHost headlessHost = SafeHeadlessElementHost.getInstance(getContext()).getHeadlessHost();
+        final AsyncUIElement<? extends UIElementGroup, O> element = (AsyncUIElement<? extends UIElementGroup, O>) mProvider.create(getContext(), object, headlessHost);
         setUIElement(element);
 
         element.update(object, flags);

@@ -69,9 +69,9 @@ public class TweetsListView extends AsyncListView {
 
         if (mPresenterId == R.layout.tweet_async_row && !hasItemManager()) {
             final UIElementCache elementCache = App.getInstance(context).getElementCache();
-            final AsyncUIElementProvider<Tweet> elementProvider = AsyncTweetElementProvider.SHARED;
+            final AsyncUIElementProvider<Tweet> provider = AsyncTweetElementProvider.SHARED;
 
-            AsyncLayoutLoader<Tweet, UIElement> loader = new AsyncLayoutLoader<>(context, elementCache, elementProvider);
+            AsyncLayoutLoader<Tweet, UIElement> loader = new AsyncLayoutLoader<>(context, elementCache, provider);
 
             ItemManager.Builder builder = new ItemManager.Builder(loader);
             builder.setPreloadItemsEnabled(true).setPreloadItemsCount(30);
@@ -91,7 +91,7 @@ public class TweetsListView extends AsyncListView {
                 updateTargetWidth();
                 updateItemLoader();
 
-                final AsyncTweetElementProvider provider = AsyncTweetElementProvider.SHARED;
+                final AsyncUIElementProvider<Tweet> provider = AsyncTweetElementProvider.SHARED;
                 mTweetsAdapter = new TweetsAdapter(provider, getContext(), mPresenterId);
                 setAdapter(mTweetsAdapter);
 

@@ -1,6 +1,7 @@
-package org.lucasr.layoutsamples.async;
+package org.lucasr.uielement.async;
 
 import android.content.Context;
+
 import java.lang.ref.WeakReference;
 
 public class SafeHeadlessElementHost {
