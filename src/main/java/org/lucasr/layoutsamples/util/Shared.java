@@ -2,18 +2,12 @@ package org.lucasr.layoutsamples.util;
 
 import android.annotation.SuppressLint;
 import android.app.Application;
-import android.content.Context;
-import android.content.res.Resources;
 import android.graphics.drawable.Drawable;
 import android.support.annotation.ColorRes;
 import android.support.annotation.DimenRes;
 import android.support.annotation.DrawableRes;
-import android.support.annotation.IdRes;
 import android.support.annotation.StringRes;
 import android.support.v4.content.ContextCompat;
-import android.util.Log;
-
-import org.lucasr.layoutsamples.app.R;
 
 import java.lang.reflect.InvocationTargetException;
 import java.util.HashMap;
@@ -21,7 +15,6 @@ import java.util.HashMap;
 public class Shared {
 
     private Shared() {
-        Log.e(Shared.class.getName(), "Point X");
         if (application == null) {
             application = getApplicationUsingReflection();
         }
@@ -56,7 +49,7 @@ public class Shared {
         return (Drawable) drawableObject;
     }
 
-    private int getColorRes(@ColorRes int id){
+    private int getColorRes(@ColorRes int id) {
         Object intObject = mValuesMap.get(id);
         if (null != intObject) {
             return (int) intObject;

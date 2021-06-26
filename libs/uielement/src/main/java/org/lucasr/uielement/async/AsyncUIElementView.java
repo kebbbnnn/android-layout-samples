@@ -27,20 +27,15 @@ import org.lucasr.uielement.canvas.UIElementView;
 
 import java.util.EnumSet;
 
-public class AsyncUIView<O extends Hashable> extends UIElementView implements UIElementViewPresenter<O> {
+public class AsyncUIElementView<O extends Hashable> extends UIElementView implements UIElementViewPresenter<O> {
     private AsyncUIElementProvider<O> mProvider;
 
-    public AsyncUIView(Context context, AttributeSet attrs) {
+    public AsyncUIElementView(Context context, AttributeSet attrs) {
         this(context, attrs, 0);
     }
 
-    public AsyncUIView(Context context, AttributeSet attrs, int defStyleAttr) {
+    public AsyncUIElementView(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
-    }
-
-    @Override
-    public boolean hasAsyncUIElementProvider() {
-        return null != mProvider;
     }
 
     @Override

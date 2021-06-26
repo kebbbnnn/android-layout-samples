@@ -4,7 +4,7 @@ import android.content.Context;
 
 import java.lang.ref.WeakReference;
 
-public class SafeHeadlessElementHost {
+public final class SafeHeadlessElementHost {
     private WeakReference<HeadlessElementHost> mHeadlessHost;
 
     private SafeHeadlessElementHost() {}

@@ -28,12 +28,12 @@ import org.lucasr.uielement.canvas.UIElement;
 public class AsyncLayoutLoader<O extends Hashable, E extends UIElement> extends SimpleItemLoader<O, E> {
     private final Context mContext;
     private final UIElementCache mElementCache;
-    private final AsyncUIElementProvider<O> mElementProvider;
+    private final AsyncUIElementProvider<O> mProvider;
 
-    public AsyncLayoutLoader(Context context, UIElementCache elementCache, AsyncUIElementProvider<O> elementProvider) {
+    public AsyncLayoutLoader(Context context, UIElementCache elementCache, AsyncUIElementProvider<O> provider) {
         mContext = context;
         mElementCache = elementCache;
-        mElementProvider = elementProvider;
+        mProvider = provider;
     }
 
     @SuppressWarnings("unchecked")
@@ -46,7 +46,7 @@ public class AsyncLayoutLoader<O extends Hashable, E extends UIElement> extends 
     @Override
     public E loadItem(O object) {
         final HeadlessElementHost headlessHost = SafeHeadlessElementHost.getInstance(mContext).getHeadlessHost();
-        return (E) mElementProvider.create(mContext, object, headlessHost);
+        return (E) mProvider.create(mContext, object, headlessHost);
     }
 
     @SuppressWarnings("unchecked")

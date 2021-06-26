@@ -230,11 +230,6 @@ public class TweetLayoutView extends ViewGroup implements UIElementViewPresenter
     }
 
     @Override
-    public boolean hasAsyncUIElementProvider() {
-        return false;
-    }
-
-    @Override
     public void setAsyncUIElementProvider(AsyncUIElementProvider<Tweet> provider) {
         // We don't need async ui element provider here
     }

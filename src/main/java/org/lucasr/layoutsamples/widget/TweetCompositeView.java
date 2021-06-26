@@ -101,11 +101,6 @@ public class TweetCompositeView extends RelativeLayout implements UIElementViewP
     }
 
     @Override
-    public boolean hasAsyncUIElementProvider() {
-        return false;
-    }
-
-    @Override
     public void setAsyncUIElementProvider(AsyncUIElementProvider<Tweet> provider) {
         // We don't need async ui element provider here
     }

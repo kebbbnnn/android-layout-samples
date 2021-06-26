@@ -27,9 +27,11 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 import org.lucasr.layoutsamples.app.R;
 import org.lucasr.layoutsamples.util.RawResource;
-import org.lucasr.uielement.adapter.UpdateFlags;
 import org.lucasr.uielement.adapter.UIElementViewPresenter;
+import org.lucasr.uielement.adapter.UpdateFlags;
 import org.lucasr.uielement.async.AsyncUIElementProvider;
+import org.lucasr.uielement.async.AsyncUIElementView;
+import org.lucasr.uielement.cache.Hashable;
 
 import java.util.ArrayList;
 import java.util.EnumSet;
@@ -92,17 +94,24 @@ public class TweetsAdapter extends BaseAdapter {
         return sEntries != null ? sEntries.get(position) : null;
     }
 
+    private boolean async(View view) {
+        return (view instanceof AsyncUIElementView);
+    }
+
     @SuppressWarnings("unchecked")
+    private <O extends Hashable> UIElementViewPresenter<O> getElementView(int position, View convertView, ViewGroup parent) {
+        if (convertView == null) {
+            return (UIElementViewPresenter<O>) LayoutInflater.from(mContext).inflate(mPresenterId, parent, false);
+        } else {
+            return (UIElementViewPresenter<O>) convertView;
+        }
+    }
+
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        final UIElementViewPresenter<Tweet> presenter;
-        if (convertView == null) {
-            presenter = (UIElementViewPresenter<Tweet>) LayoutInflater.from(mContext).inflate(mPresenterId, parent, false);
-        } else {
-            presenter = (UIElementViewPresenter<Tweet>) convertView;
-        }
+        final UIElementViewPresenter<Tweet> presenter = getElementView(position, convertView, parent);
 
-        if (mPresenterId == R.layout.tweet_async_row && !presenter.hasAsyncUIElementProvider()) {
+        if (async((View) presenter)) {
             presenter.setAsyncUIElementProvider(mProvider);
         }
 
