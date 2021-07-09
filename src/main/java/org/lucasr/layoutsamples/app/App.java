@@ -25,7 +25,6 @@ import android.support.annotation.NonNull;
 import android.view.View;
 import android.view.ViewGroup;
 
-import org.lucasr.layoutsamples.widget.TweetElementLayout;
 import org.lucasr.uielement.cache.UIElementCache;
 
 import jp.wasabeef.takt.Takt;
@@ -38,8 +37,6 @@ public class App extends Application {
         super.onCreate();
 
         Takt.stock(this).color(Color.BLACK);
-
-        TweetElementLayout.shared.warmup();
 
         /*UIElementInflater.from(this).preloadElementConstructors(new HashMap<String, Constructor<? extends UIElement>>() {{
             try {
