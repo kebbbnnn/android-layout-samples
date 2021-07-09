@@ -20,6 +20,7 @@ import android.annotation.SuppressLint;
 import android.app.Application;
 import android.content.Context;
 import android.content.res.Resources;
+import android.graphics.Color;
 import android.support.annotation.NonNull;
 import android.view.View;
 import android.view.ViewGroup;
@@ -27,12 +28,16 @@ import android.view.ViewGroup;
 import org.lucasr.layoutsamples.widget.TweetElementLayout;
 import org.lucasr.uielement.cache.UIElementCache;
 
+import jp.wasabeef.takt.Takt;
+
 public class App extends Application {
     private UIElementCache mElementCache;
 
     @Override
     public void onCreate() {
         super.onCreate();
+
+        Takt.stock(this).color(Color.BLACK);
 
         TweetElementLayout.shared.warmup();
 

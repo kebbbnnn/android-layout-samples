@@ -29,6 +29,7 @@ import android.view.ViewGroup.LayoutParams;
 
 import org.lucasr.uielement.R;
 
+@SuppressWarnings("FieldMayBeFinal")
 public abstract class AbstractUIElement implements UIElement {
     protected UIElementHost mHost;
 

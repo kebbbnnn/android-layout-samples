@@ -34,6 +34,7 @@ import android.widget.ImageView.ScaleType;
 
 import org.lucasr.uielement.R;
 
+@SuppressWarnings("FieldMayBeFinal")
 public class ImageElement extends AbstractUIElement implements Drawable.Callback {
     private static final String LOGTAG = "ImageElement";
 

@@ -1,2 +1,3 @@
 include ':libs:uielement'
 include ':libs:smoothie'
+include ':libs:takt'

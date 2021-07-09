@@ -36,6 +36,7 @@ import android.view.ViewGroup.LayoutParams;
 
 import org.lucasr.uielement.R;
 
+@SuppressWarnings("FieldMayBeFinal")
 public class TextElement extends AbstractUIElement {
     private static final String LOGTAG = "TextElement";
 
