@@ -35,6 +35,8 @@ import org.lucasr.layoutsamples.adapter.Action;
 import org.lucasr.layoutsamples.adapter.Tweet;
 import org.lucasr.layoutsamples.canvas.TappableImageElement;
 import org.lucasr.layoutsamples.util.ImageUtils;
+import org.lucasr.layoutsamples.util.layout.ValidLayout;
+import org.lucasr.layoutsamples.util.layout.ValidMeasure;
 import org.lucasr.layoutsamples.widget.specs.TweetElementSpecs;
 import org.lucasr.uielement.adapter.ImagePresenter;
 import org.lucasr.uielement.adapter.UIElementPresenter;
@@ -57,6 +59,9 @@ public class TweetElement extends UIElementGroup implements UIElementPresenter<T
 
     private final ImageElementTarget mProfileImageTarget;
     private final ImageElementTarget mPostImageTarget;
+
+    private final ValidMeasure validMeasure = new ValidMeasure();
+    private final ValidLayout validLayout = new ValidLayout();
 
     public TweetElement(UIElementHost host) {
         this(host, null);
@@ -120,6 +125,12 @@ public class TweetElement extends UIElementGroup implements UIElementPresenter<T
                 @Override
                 public void onClick(UIElement element) {
                     Log.d(TweetElement.class.getName(), "Action clicked: " + action);
+
+                    mPostImage.setVisibility(mPostImage.getVisibility() == View.GONE ? View.VISIBLE : View.GONE);
+
+                    measure(validMeasure.widthMeasureSpec, validMeasure.heightMeasureSpec);
+                    layout(validLayout.l, validLayout.t, validLayout.r, validLayout.b);
+
                     ((Activity) getContext()).getWindow().getDecorView().performHapticFeedback(HapticFeedbackConstants.VIRTUAL_KEY, HapticFeedbackConstants.FLAG_IGNORE_GLOBAL_SETTING);
                 }
             });
@@ -178,6 +189,8 @@ public class TweetElement extends UIElementGroup implements UIElementPresenter<T
 
     @Override
     public void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
+        validMeasure.set(widthMeasureSpec, heightMeasureSpec);
+
         final int widthSize = MeasureSpec.getSize(widthMeasureSpec);
 
         int widthUsed = 0;
@@ -212,11 +225,7 @@ public class TweetElement extends UIElementGroup implements UIElementPresenter<T
                     widthMeasureSpec, widthUsed,
                     heightMeasureSpec, heightUsed);
 
-            final int height = getMeasuredHeightWithMargins(icon);
-            if (height > maxIconHeight) {
-                maxIconHeight = height;
-            }
-
+            maxIconHeight = Math.max(maxIconHeight, getMeasuredHeightWithMargins(icon));
             widthUsed += getMeasuredWidthWithMargins(icon);
         }
         heightUsed += maxIconHeight;
@@ -227,6 +236,8 @@ public class TweetElement extends UIElementGroup implements UIElementPresenter<T
 
     @Override
     public void onLayout(int l, int t, int r, int b) {
+        validLayout.set(l, t, r, b);
+
         final int paddingLeft = getPaddingLeft();
         final int paddingTop = getPaddingTop();
 
@@ -267,21 +278,37 @@ public class TweetElement extends UIElementGroup implements UIElementPresenter<T
     }
 
     private void loadProfileImage(Tweet tweet, EnumSet<UpdateFlags> flags) {
-        ImageUtils.loadImage(getContext(), mProfileImage, mProfileImageTarget,
-                tweet.getProfileImageUrl(), flags, true);
+        ImageUtils.loadImage(
+                getContext(),
+                mProfileImage,
+                mProfileImageTarget,
+                tweet.getProfileImageUrl(),
+                flags,
+                true
+        );
     }
 
     private void loadPostImage(Tweet tweet, EnumSet<UpdateFlags> flags) {
-        ImageUtils.loadImage(getContext(), mPostImage, mPostImageTarget,
-                tweet.getPostImageUrl(), flags, false);
+        if (mPostImage.getVisibility() != View.GONE) {
+            ImageUtils.loadImage(
+                    getContext(),
+                    mPostImage,
+                    mPostImageTarget,
+                    tweet.getPostImageUrl(),
+                    flags,
+                    false
+            );
+        }
     }
 
     @Override
     public void load(Tweet tweet, EnumSet<UpdateFlags> flags) {
         loadProfileImage(tweet, flags);
 
+        final boolean visible = mPostImage.getVisibility() == View.VISIBLE;
         final boolean hasPostImage = !TextUtils.isEmpty(tweet.getPostImageUrl());
-        mPostImage.setVisibility(hasPostImage ? View.VISIBLE : View.GONE);
+
+        mPostImage.setVisibility((visible && hasPostImage) ? View.VISIBLE : View.GONE);
         if (hasPostImage) {
             loadPostImage(tweet, flags);
         }

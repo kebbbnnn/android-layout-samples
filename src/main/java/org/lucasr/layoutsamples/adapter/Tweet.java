@@ -84,4 +84,9 @@ public class Tweet implements Hashable {
     public int hashCode() {
         return (int) getId();
     }
+
+    @Override
+    public long id() {
+        return getId();
+    }
 }

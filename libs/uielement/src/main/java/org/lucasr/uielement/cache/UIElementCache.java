@@ -20,10 +20,16 @@ import android.util.LruCache;
 
 import org.lucasr.uielement.canvas.UIElement;
 
-public class UIElementCache extends LruCache<Hashable, UIElement> {
-    private static final int MAX_CACHED_ELEMENTS = 30;
+public class UIElementCache extends LruCache<Long, UIElement> {
+    private static final int MAX_CACHED_ELEMENTS = calculateMaxSize();
 
     public UIElementCache() {
         super(MAX_CACHED_ELEMENTS);
+    }
+
+    private static int calculateMaxSize() {
+        final int maxMemory = (int) (Runtime.getRuntime().maxMemory() / 1024);
+        // Use 1/8th of the available memory for this memory cache.
+        return maxMemory / 8;
     }
 }

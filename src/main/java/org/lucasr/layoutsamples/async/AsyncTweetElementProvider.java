@@ -56,7 +56,7 @@ public class AsyncTweetElementProvider implements AsyncUIElementProvider<Tweet> 
     public synchronized AsyncUIElement<TweetElement, Tweet> create(Context context, Tweet tweet, UIElementHost headlessHost) {
         UIElementCache elementCache = App.getInstance(context).getElementCache();
 
-        AsyncUIElement<TweetElement, Tweet> asyncElement = (AsyncUIElement<TweetElement, Tweet>) elementCache.get(tweet);
+        AsyncUIElement<TweetElement, Tweet> asyncElement = (AsyncUIElement<TweetElement, Tweet>) elementCache.get(tweet.id());
         if (asyncElement != null) {
             if (!asyncElement.isAttachedToHost()) {
                 asyncElement.swapHost(headlessHost);
@@ -75,7 +75,7 @@ public class AsyncTweetElementProvider implements AsyncUIElementProvider<Tweet> 
         element.layout(0, 0, element.getMeasuredWidth(), element.getMeasuredHeight());
 
         asyncElement = new AsyncUIElement<TweetElement, Tweet>(element);
-        elementCache.put(tweet, asyncElement);
+        elementCache.put(tweet.id(), asyncElement);
 
         return asyncElement;
     }

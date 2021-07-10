@@ -52,7 +52,7 @@ public class AsyncLayoutLoader<O extends Hashable, E extends UIElement> extends 
     @SuppressWarnings("unchecked")
     @Override
     public E loadItemFromMemory(O object) {
-        return (E) mElementCache.get(object);
+        return (E) mElementCache.get(object.id());
     }
 
     @Override
