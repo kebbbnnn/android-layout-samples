@@ -40,7 +40,7 @@ import org.lucasr.uielement.R;
 public class TextElement extends AbstractUIElement {
     private static final String LOGTAG = "TextElement";
 
-    public CharSequence mText;
+    private CharSequence mText;
 
     private ColorStateList mTextColor;
     private int mCurTextColor;

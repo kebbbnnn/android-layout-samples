@@ -41,6 +41,7 @@ import org.lucasr.layoutsamples.widget.specs.TweetElementSpecs;
 import org.lucasr.uielement.adapter.ImagePresenter;
 import org.lucasr.uielement.adapter.UIElementPresenter;
 import org.lucasr.uielement.adapter.UpdateFlags;
+import org.lucasr.uielement.canvas.AbstractUIElement;
 import org.lucasr.uielement.canvas.ImageElement;
 import org.lucasr.uielement.canvas.TextElement;
 import org.lucasr.uielement.canvas.UIElement;
@@ -125,13 +126,16 @@ public class TweetElement extends UIElementGroup implements UIElementPresenter<T
                 @Override
                 public void onClick(UIElement element) {
                     Log.d(TweetElement.class.getName(), "Action clicked: " + action);
+                    if (element instanceof AbstractUIElement) {
+                        View parent = ((View) ((AbstractUIElement) element).getHost());
+                        Log.e(TweetElement.class.getName(), "VIEW: " + parent);
+                        parent.performHapticFeedback(HapticFeedbackConstants.VIRTUAL_KEY, HapticFeedbackConstants.FLAG_IGNORE_GLOBAL_SETTING);
+                    }
 
                     mPostImage.setVisibility(mPostImage.getVisibility() == View.GONE ? View.VISIBLE : View.GONE);
 
                     measure(validMeasure.widthMeasureSpec, validMeasure.heightMeasureSpec);
                     layout(validLayout.l, validLayout.t, validLayout.r, validLayout.b);
-
-                    ((Activity) getContext()).getWindow().getDecorView().performHapticFeedback(HapticFeedbackConstants.VIRTUAL_KEY, HapticFeedbackConstants.FLAG_IGNORE_GLOBAL_SETTING);
                 }
             });
 

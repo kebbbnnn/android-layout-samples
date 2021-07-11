@@ -12,6 +12,8 @@ import android.view.Window;
 import android.view.animation.AccelerateDecelerateInterpolator;
 import android.view.animation.Interpolator;
 
+import org.lucasr.layoutsamples.widget.TweetElement;
+import org.lucasr.uielement.canvas.AbstractUIElement;
 import org.lucasr.uielement.canvas.ImageElement;
 import org.lucasr.uielement.canvas.UIElementHost;
 
@@ -86,20 +88,11 @@ public class TappableImageElement extends ImageElement {
         mValueAnimator.start();
 
         boolean clicked = super.callOnClick();
-        View grandParentView = grandParentView();
-        Log.e(TappableImageElement.class.getName(), "clicked: " + clicked + ", grandParentView: " + grandParentView);
-        if (clicked && grandParentView != null) {
-            grandParentView.getRootView().performHapticFeedback(HapticFeedbackConstants.VIRTUAL_KEY, HapticFeedbackConstants.FLAG_IGNORE_GLOBAL_SETTING);
+        if (clicked) {
+            View parent = ((View) ((AbstractUIElement) this).getHost());
+            parent.performHapticFeedback(HapticFeedbackConstants.VIRTUAL_KEY, HapticFeedbackConstants.FLAG_IGNORE_GLOBAL_SETTING);
         }
+
         return clicked;
     }
-
-    private View grandParentView() {
-        Window window = ((Activity) getContext()).getWindow();
-        if (window != null) {
-            return window.getDecorView();
-        }
-        return null;
-    }
-
 }

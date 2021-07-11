@@ -85,6 +85,10 @@ public abstract class AbstractUIElement implements UIElement {
         a.recycle();
     }
 
+    public UIElementHost getHost() {
+        return mHost;
+    }
+
     protected void onAttachedToHost() {
     }
 
